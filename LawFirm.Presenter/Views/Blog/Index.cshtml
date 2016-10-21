@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "Блог";
+}
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div class="container body-content">
+    <div class="row blog-preview-page">
+        <div class="col-md-7 left-bar">
+            <ul>
+                <li>
+                    <div class="item-container">
+                        <div class="img-preview">
+                            <img src="~/Images/Blog/Blog-photos.jpg" class="img-responsive" />
+                        </div>
+                        <div class="details">
+                            <div class="data">15.9.2016</div>
+                            <div class="like">
+                                <a>
+                                    <i class="glyphicon glyphicon-heart-empty"></i>
+                                    <span>6</span>
+                                </a>
+                            </div>
+                            <div class="comment">
+                                <a>
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                    <span>10</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="title text-uppercase">
+                            @*@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
+                            <a>локальный репозиторий</a>
+                        </div>
+                        <div class="short-text">
+                            <p>
+                                локальный репозиторийлокальный репозиторийлокальный репозиторий
+                                локальный репозиторийлокальный репозиторий
+                                локальный репозиторий
+                                локальный репозиторий локальный репозиторийлокальный репозиторийлокальный репозиторий
+                                <a> → </a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-container">
+                        <div class="img-preview">
+                            <img src="~/Images/Blog/Blog-photos.jpg" class="img-responsive" />
+                        </div>
+                        <div class="details">
+                            <div class="data">15.9.2016</div>
+                            <div class="like">
+                                <a>
+                                    <i class="glyphicon glyphicon-heart-empty"></i>
+                                    <span>6</span>
+                                </a>
+                            </div>
+                            <div class="comment">
+                                <a>
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                    <span>10</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="title text-uppercase">
+                            @*@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
+                            <a>локальный репозиторий</a>
+                        </div>
+                        <div class="short-text">
+                            <p>
+                                локальный репозиторийлокальный репозиторийлокальный репозиторий
+                                локальный репозиторийлокальный репозиторий
+                                локальный репозиторий
+                                локальный репозиторий локальный репозиторийлокальный репозиторийлокальный репозиторий
+                                <a> → </a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-offset-1 col-md-4 right-bar">
+            @using (Html.BeginForm()) {
+                @Html.AntiForgeryToken()
+                <div class="input-group search-group">
+                    <input type="text" class="form-control" placeholder="Найти...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div><!-- /input-group -->
+            }
+            <div class="recent-news">
+                <h4>Последние новости</h4>
+                <ul>
+                    <li class="clearfix">
+                        <div class="item-preview-container">
+                            <div class="img-preview">
+                                <img src="~/Images/Blog/Blog-photos.jpg" class="img-responsive" />
+                            </div>
+                            <div class="shortest-text">
+                                <a class="news-title">локальный репозиторий</a>
+                                <p>
+                                    локальный репозиторий лок альный репози
+                                    <a> → </a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="item-preview-container">
+                            <div class="img-preview">
+                                <img src="~/Images/Blog/Blog-photos.jpg" class="img-responsive" />
+                            </div>
+                            <div class="shortest-text">
+                                <a class="news-title">локальный репозиторий</a>
+                                <p>
+                                    локальный репозиторий лок альный репози
+                                    <a> → </a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="archive">
+                <h4>Архив новостей</h4>
+                <ul>
+                    <li class="clearfix">
+                        <div class="">
+                            <a class="">Ноябрь 2016</a>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="">
+                            <a class="">Декабрь 2016</a>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="">
+                            <a class="">Ноябрь 2016</a>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="">
+                            <a class="">Декабрь 2016</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="categories">
+                <h4>Категории</h4>
+                <ul>
+                    <li class="clearfix">
+                        <div class="">
+                            <a class="">Семейное право</a>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="">
+                            <a class="">Образование</a>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="">
+                            <a class="">Семейное право</a>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="">
+                            <a class="">Недвижимость</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

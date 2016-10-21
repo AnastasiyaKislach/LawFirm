@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="@Url.Action("Index", "Home", new {area = ""})" title="">
+                <img class="img-responsive logo-img" src="~/Images/logo.png"/>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right" id="custom-menu">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Обо мне", "About", "Home")</li>
+                <li>@Html.ActionLink("Дела", "Index", "Practice")</li>
+                <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
+                <li>@Html.ActionLink("Отзывы", "Index", "Testimonial")</li>
+                <li>@Html.ActionLink("FAQ's", "Index", "Question")</li>
+                <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                @Html.Partial("_LoginPartial")
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="">
+    @RenderBody()
+    @*<hr />*@
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="col-md-3 footer-block">
+            <div class="shortblock">
+                <h4>Разделы</h4>
+                <ul class="menu">
+                    <li><a class="">Обо мне</a></li>
+                    <li><a class="">Дела</a></li>
+                    <li><a class="">Блог</a></li>
+                    <li><a class="">Отзывы</a></li>
+                    <li><a class="">FAQ's</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3 footer-block">
+            <div class="shortblock">
+                <h4>Контакты</h4>
+                <ul class="footer-contacts-list">
+                    <li>
+                        <div class="footerlist-glyphicon">
+                            <i class="glyphicon glyphicon-earphone"></i>
+                        </div>
+                        <div class="footerlist-text">
+                            <span> +375 163 411885 </span>
+                            <br/>
+                            <span> +375 29 1658893 </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="footerlist-glyphicon">
+                            <i class="glyphicon glyphicon-map-marker"></i>
+                        </div>
+                        <div class="footerlist-text">
+                            <span> г. Барановичи</span>
+                            <br/>
+                            <span> ул. Комсомольская, 11</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="footerlist-glyphicon">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                        </div>
+                        <div class="footerlist-text">
+                            <span> lili@gmail.com</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="footerlist-glyphicon">
+                            <i class="glyphicon glyphicon glyphicon-time"></i>
+                        </div>
+                        <div class="footerlist-text">
+                            <span> пн.-пт.: 09:00 - 18:00</span>
+                            <br/>
+                            <span> сб.-вс.: выходной</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3  footer-block">
+            <div class="shortblock">
+                <h4>Обо мне</h4>
+                <div class="">
+                    <p>
+                        Maecenas etos sit amet, consectetur adipis cing elit. Terminal volutpat rutrum metro amet sollicitudin interdum.
+                        Ante tellus gravida mollis tellus neque vitae elit. Mauris adipiscing mauris...
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 footer-block">
+            <div class="shortblock">
+                <h4>Последние новости</h4>
+                <ul class="recent-news-footer">
+                    <li>
+                        <a href="">Etiam id neque ac tortor malesuada</a>
+                        <br/>
+                        <span class="post-date">March 13, 2014</span>
+                    </li>
+                    <li>
+                        <a href="">Etiam id neque ac tortor malesuada</a>
+                        <br/>
+                        <span class="post-date">February 13, 2014</span>
+                    </li>
+                    <li>
+                        <a href="">Etiam id neque ac tortor malesuada</a>
+                        <br/>
+                        <span class="post-date">January 13, 2014</span>
+                    </li>
+                    <li>
+                        <a href="">Etiam id neque ac tortor malesuada</a>
+                        <br/>
+                        <span class="post-date">December 26, 2013</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="text-center">&copy; @DateTime.Now.Year – Copyright. All Rights Reserved.</p>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿@using LawFirm.Presenter.Models
+@model HomeViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container body-content">
+    @Html.Partial("_Slider", Model.Slides)
+    @Html.Partial("_CallMeBlock", Model.CallMeBlock)
+    @Html.Partial("_PracticePreview", Model.PracticePreview)
+    @Html.Partial("_TestimonialsPreview", Model.TestimonialsPreview)
+    @Html.Partial("_BlogPreview", Model.BlogPreview)
+    @Html.Partial("_Consultation", Model.RequestaConsultationForm)
+</div>
+
+
+

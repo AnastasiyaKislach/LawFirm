@@ -1,0 +1,49 @@
+﻿@model LawFirm.Presenter.Models.BlogPreviewViewModel
+
+<div class="blog-preview-block">
+    <div class="text-center">
+        <h2>@Model.Title</h2>
+    </div>
+    <div class="reference text-center">
+        <a href="@Model.ButtonLink">@Model.ButtonText</a>
+        <i class="glyphicon glyphicon-arrow-right"></i>
+    </div>
+    <div class="row preview-block">
+        @foreach (var item in Model.BlogItems) {
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 item-container">
+                <div class="img-preview">
+                    <img src="@item.ImagePath" class="img-responsive" />
+                </div>
+                <div class="details">
+                    <div class="data">
+                        @item.Date.Day.@item.Date.Month.@item.Date.Year
+                    </div>
+                    <div class="like">
+                        <a>
+                            <i class="glyphicon glyphicon-heart-empty"></i>
+                            <span>@item.Likes</span>
+                        </a>
+                    </div>
+                    <div class="comment">
+                        <a>
+                            <i class="glyphicon glyphicon-comment"></i>
+                            <span>@item.Comments</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="title">
+                    @*@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
+                    <a>@item.Title</a>
+                </div>
+                <div class="short-text">
+                    <p>
+                        @item.Text
+                    <a> → </a>
+                </p>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<hr />
+

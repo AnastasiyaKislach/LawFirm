@@ -1,0 +1,122 @@
+﻿@model LawFirm.Presenter.Models.FeedBackViewModel
+
+@{
+    ViewBag.Title = "Контакты";
+}
+
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div class="container body-content">
+    <div class="row inquiries-container">
+        <div class="col-md-6 form-block">
+            @using (Html.BeginForm()) {
+                @Html.AntiForgeryToken()
+
+                <h4>Форма обратной связи</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })*@
+                    <label class="control-label">ФИО</label>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })*@
+                    <label class="control-label">Адрес электронной почты</label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label" })*@
+                    <label class="control-label">Контактный телефон</label>
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label" })*@
+                    <label class="control-label">Сообщение</label>
+                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control", @id = "inputDescription"})
+                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group upload-box">
+                    <input type="file" multiple="multiple" name="files[]" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Отправить" class="btn btn-default" />
+                </div>
+            }
+        </div>
+        <div class="col-md-offset-1 col-md-5 contact-info-block">
+            <div class="contacts-title">
+                <h4>Контактная информация</h4>
+            </div>
+            <ul class="contacts-list">
+                <li>
+                    <div class="glyphicon-box">
+                        <i class="glyphicon glyphicon-earphone"></i>
+                    </div>
+                    <div class="text-box">
+                        <span> +375 163 411885, </span>
+                        <br />
+                        <span> +375 29 1658893 </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="glyphicon-box">
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                    </div>
+                    <div class="text-box">
+                        <span> г. Барановичи,</span>
+                        <br />
+                        <span> ул. Комсомольская, 11</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="glyphicon-box">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </div>
+                    <div class="text-box">
+                        <span> lili@gmail.com</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="glyphicon-box">
+                        <i class="glyphicon glyphicon-time"></i>
+                    </div>
+                    <div class="text-box">
+                        <span> пн.-пт.: 09:00 - 18:00,</span>
+                        <br />
+                        <span> сб.-вс.: выходной</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2393.889898885571!2d26.010473115830358!3d53.13012197993428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46d8cfdbfcc459ad%3A0xc6c0eb928ff64542!2z0JrQvtC80YHQvtC80L7Qu9GM0YHQutCw0Y8g0YPQuy4gMTEsINCR0LDRgNCw0L3QvtCy0LjRh9C4!5e0!3m2!1sru!2sby!4v1476105668924"></iframe>
+    </div>
+</div>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+    function initialize() {
+        map = new google.maps.Map(document.getElementById('map-container'), {
+            zoom: 12,
+            center: { lat: 53.10, lng: 26 }
+            //disableDefaultUI: true
+        });
+        var marker = new google.maps.Marker({
+            position: { lat: 53.10, lng: 26 },
+            map: map,
+            title: 'LawFirm'
+        });
+    }
+
+    initialize();
+</script>-->
