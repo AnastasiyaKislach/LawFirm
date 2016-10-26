@@ -1,7 +1,7 @@
 ﻿@using LawFirm.Presenter.Models
 @model LawFirm.Presenter.Models.ConsultationPreviewViewModel
 
-<div id="consultation-request-section" class="request-a-consultation-form">
+<div id="consultation-request-section" class="form">
     @using (Ajax.BeginForm("ConsultationRequest", "Consultation", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "consultation-request-section", OnSuccess = "alert('cscs')", }, new { @class = "", @id = "requestForm", role = "form" })) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -11,7 +11,7 @@
         <div class="text-center add-text">
             <h4>@Model.SubTitle</h4>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-offset-1 col-md-4">
             <div class="form-group text-center">
                 <label class="sr-only">@Model.PhName</label>
                 @*@Html.LabelFor(m => m.PhName, new { @class = "col-md-3 control-label" })*@
@@ -33,14 +33,14 @@
                 @Html.DropDownListFor(m => m.RequestViewModel.PracticeAreaId, Model.PracticeAreas, new { @class = "form-control" })
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="form-group">
                 <label class="sr-only">@Model.PhDescription</label>
                 @Html.TextAreaFor(m => m.RequestViewModel.Description, new { @class = "form-control", @id = "inputDescription", @placeholder = Model.PhDescription })
                 @*<textarea class="form-control" id="inputDescription" placeholder="@Model.PhDescription"></textarea>*@
             </div>
         </div>
-        <div class="col-md-offset-4 col-md-8 form-group button">
+        <div class="col-md-offset-5 col-md-7 form-group button">
             <input type="submit" class="btn btn-success-own" value="@Model.ButtonText" />
         </div>
     }

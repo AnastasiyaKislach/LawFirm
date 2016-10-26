@@ -8,65 +8,165 @@
     </div>
 </div>
 <div class="container body-content testimonials">
-    <div class="col-md-4 testimonials-container">
-        <div class="testimonial-block">
-            <div class="author">
-                <h2>Елена Домброва</h2>
-            </div>
-            <div class="testimonial-text">
-                <h4>
-                    Адвокат добился прекращения уголовного дела в отношении близкого
-                    для меня человека. Огромное ему спасибо. Выручил в тяжелой
-                    ситуации, когда был действительно нужен хороший адвокат.
-                </h4>
-            </div>
-            <div class="date">
-                <p>
-                    25.05.16
-                </p>
+    <div class="row">
+        <div class="col-md-4 testimonials-container">
+            <div class="testimonial-block">
+                <div class="author">
+                    <h4>Елена Домброва</h4>
+                </div>
+                <div class="testimonial-text">
+                    <p>
+                        Адвокат добился прекращения уголовного дела в отношении близкого
+                        для меня человека. Выручил в тяжелой
+                        ситуации, когда был действительно нужен хороший адвокат.
+                    </p>
+                </div>
+                <div class="break">—</div>
+                <div class="date">
+                    <p>
+                        25.05.16
+                    </p>
+                </div>
             </div>
         </div>
-
+        <div class="col-md-4 testimonials-container">
+            <div class="testimonial-block">
+                <div class="author">
+                    <h4>Елена Домброва</h4>
+                </div>
+                <div class="testimonial-text">
+                    <p>
+                        Адвокат добился прекращения уголовного дела в отношении близкого
+                        для меня человека. Огромное ему спасибо. Выручил в тяжелой
+                        ситуации, когда был действительно нужен хороший адвокат.
+                    </p>
+                </div>
+                <div class="break">—</div>
+                <div class="date">
+                    <p>
+                        25.05.16
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 testimonials-container">
+            <div class="testimonial-block">
+                <div class="author">
+                    <h4>Елена Домброва</h4>
+                </div>
+                <div class="testimonial-text">
+                    <p>
+                        Адвокат добился прекращения уголовного дела в отношении близкого
+                        для меня человека. Огромное ему спасибо.
+                    </p>
+                </div>
+                <div class="break">—</div>
+                <div class="date">
+                    <p>
+                        25.05.16
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4 testimonials-container">
-        <div class="testimonial-block">
-            <div class="author">
-                <h2>Елена Домброва</h2>
-            </div>
-            <div class="testimonial-text">
-                <h4>
-                    Адвокат добился прекращения уголовного дела в отношении близкого
-                    для меня человека. Огромное ему спасибо. Выручил в тяжелой
-                    ситуации, когда был действительно нужен хороший адвокат.
-                </h4>
-            </div>
-            <div class="date">
-                <p>
-                    25.05.16
-                </p>
+    <div class="row">
+        <div class="col-md-4 testimonials-container">
+            <div class="testimonial-block">
+                <div class="author">
+                    <h4>Елена Домброва</h4>
+                </div>
+                <div class="testimonial-text">
+                    <p>
+                        Адвокат добился прекращения уголовного дела в отношении близкого
+                        для меня человека. Огромное ему спасибо.
+                    </p>
+                </div>
+                <div class="break">—</div>
+                <div class="date">
+                    <p>
+                        25.05.16
+                    </p>
+                </div>
             </div>
         </div>
-
+        <div class="col-md-4 testimonials-container">
+            <div class="testimonial-block">
+                <div class="author">
+                    <h4>Елена Домброва</h4>
+                </div>
+                <div class="testimonial-text">
+                    <p>
+                        Адвокат добился прекращения уголовного дела в отношении близкого
+                        для меня человека. Выручил в тяжелой
+                        ситуации, когда был действительно нужен хороший адвокат.
+                    </p>
+                </div>
+                <div class="break">—</div>
+                <div class="date">
+                    <p>
+                        25.05.16
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 testimonials-container">
+            <div class="testimonial-block">
+                <div class="author">
+                    <h4>Елена Домброва</h4>
+                </div>
+                <div class="testimonial-text">
+                    <p>
+                        Адвокат добился прекращения уголовного дела в отношении близкого
+                        для меня человека. Огромное ему спасибо. Выручил в тяжелой
+                        ситуации, когда был действительно нужен хороший адвокат.
+                    </p>
+                </div>
+                <div class="break">—</div>
+                <div class="date">
+                    <p>
+                        25.05.16
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4 testimonials-container">
-        <div class="testimonial-block">
-            <div class="author">
-                <h2>Елена Домброва</h2>
+    <div id="testimonial-creation" class="form">
+        @using (Ajax.BeginForm("CreateTestimonial", "Testimonial", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "testimonial-creation", OnSuccess = "alert('cscs')", }, new { @class = "", @id = "requestForm", role = "form" })) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="text-center title-form">
+                @* <h2 class="text-uppercase">@Model.Title</h2>*@
+                <h2 class="text-uppercase">Оставьте свой отзыв</h2>
             </div>
-            <div class="testimonial-text">
-                <h4>
-                    Адвокат добился прекращения уголовного дела в отношении близкого
-                    для меня человека. Огромное ему спасибо. Выручил в тяжелой
-                    ситуации, когда был действительно нужен хороший адвокат.
-                </h4>
+            @*<div class="text-center add-text">
+                    <h4>@Model.SubTitle</h4>
+                </div>*@
+            <div class="col-md-offset-1 col-md-5">
+                <div class="form-group text-center">
+                    @*<label class="sr-only">@Model.PhName</label>*@
+                    @*@Html.LabelFor(m => m.PhName, new { @class = "col-md-3 control-label" })*@
+                    @* @Html.TextBoxFor(m => m.RequestViewModel.Name, new { @class = "form-control", @id = "inputName", @placeholder = Model.PhName })*@
+                    <input type="text" class="form-control" id="inputName" placeholder="ФИО" />
+                </div>
             </div>
-            <div class="date">
-                <p>
-                    25.05.16
-                </p>
+            <div class="col-md-5">
+                <div class="form-group">
+                    @*<label class="sr-only">@Model.PhEmail</label>*@
+                    @*@Html.TextBoxFor(m => m.RequestViewModel.Email, new { @class = "form-control", @id = "inputEmail", @placeholder = Model.PhEmail })*@
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Адрес электронной почты">
+                </div>
             </div>
-        </div>
-
+            <div class="col-md-offset-1 col-md-10">
+                <div class="form-group">
+                    @*<label class="sr-only">@Model.PhTestimonial</label>*@
+                    @*@Html.TextAreaFor(m => m.RequestViewModel.Description, new { @class = "form-control", @id = "inputDescription", @placeholder = Model.PhDescription })*@
+                    <textarea class="form-control" id="inputDescription" placeholder="Напишите мне что-нибудь хорошее или веселую шутку"></textarea>
+                </div>
+            </div>
+            <div class="col-md-offset-5 col-md-7 form-group button">
+                <input type="submit" class="btn btn-success-own" value="Отправить" />
+            </div>
+        }
     </div>
 </div>
 

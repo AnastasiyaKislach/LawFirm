@@ -295,6 +295,8 @@
     <Content Include="Views\Practice\Details.cshtml" />
     <Content Include="Views\Shared\_ConsultationResult.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\Shared\_CreateTestimonialResult.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

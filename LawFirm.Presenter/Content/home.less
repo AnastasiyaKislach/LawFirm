@@ -421,7 +421,7 @@ body {
     margin-top: 15px;
 }
 
-.request-a-consultation-form {
+.form {
     padding: 10px 0 30px;
     background: url('../Images/green-gradient-wallpaper-1.jpg') no-repeat;
     background-size: cover;
@@ -744,13 +744,17 @@ iframe {
     margin-bottom: 40px;
 }
 
+.titles() {
+    color: #322c2b;
+    background: url(../images/heading-bg2.png) left bottom no-repeat;
+    padding-bottom: 18px;
+}
+
 .right-bar {
     margin-top: 15px;
 
     h4 {
-        color: #322c2b;
-        background: url(../images/heading-bg2.png) left bottom no-repeat;
-        padding-bottom: 18px;
+        .titles;
     }
 
     p {
@@ -831,6 +835,57 @@ iframe {
     .link-block;
 }
 
+
+.article-text {
+    margin: 20px 0;
+
+    p {
+        text-align: justify;
+        color: #4A4A4A;
+        font-size: 16px;
+        line-height: 30px;
+    }
+}
+
+.date-publicate {
+    position: relative;
+    display: inline-block;
+    float: left;
+    color: #4A4A4A;
+    font-weight: 600;
+}
+
+.full {
+    a {
+        font-weight: 600;
+        color: #4A4A4A;
+
+        &:hover {
+            color: #000;
+        }
+    }
+}
+
+.comments {
+    margin-top: 40px;
+}
+
+.comments-title {
+    .titles;
+    padding-bottom: 5px;
+
+    h4 {
+        font-weight: 600;
+    }
+}
+
+.comments-collection {
+    margin-top: 40px;
+}
+
+.comment-one {
+}
+
 @media(max-width: 375px) {
     .blog-preview-page {
         .details {
@@ -843,10 +898,30 @@ iframe {
 //отзывы клиентов
 .testimonials-container {
     padding: 10px;
+    text-align: center;
+}
+
+.author {
+    font-weight: 700;
 }
 
 .testimonial-block {
-    border: 1px solid #929292;
+    border: 1px solid #C1C1C1;
     padding: 20px;
-    width: 90%;
+}
+
+.testimonial-text {
+    font-size: 16px;
+    font-style: italic;
+}
+
+.show-grid [class^=col-] {
+}
+
+.break {
+    margin-bottom: 10px;
+}
+
+#testimonial-creation {
+    margin-top: 50px;
 }

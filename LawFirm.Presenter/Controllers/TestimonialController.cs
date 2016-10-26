@@ -9,9 +9,12 @@ namespace LawFirm.Presenter.Controllers
     public class TestimonialController : Controller
     {
         // GET: Testimonial
-        public ActionResult Index()
+        public ActionResult CreateTestimonial()
         {
-            return View();
+			if (ModelState.IsValid) {
+
+			}
+			return PartialView("_CreateTestimonialResult");
         }
     }
 }
