@@ -889,18 +889,61 @@ iframe {
     padding: 20px;
 }
 
-.comment-author{
+.comment-details {
     border-bottom: 1px solid #000;
     padding-bottom: 10px;
+
+    span {
+        margin: 0 5px;
+    }
+
+    .author-name {
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    .date-comment {
+        color: #259c58;
+        font-weight: 600;
+    }
+
+    .answer-comment {
+    }
 }
 
-.comment-text{
+.comment-text {
     padding-top: 10px;
 }
 
-.comment-info{
-    margin: 10px;
+.comment-info {
+    margin: 10px 0;
+    padding-bottom: 10px;
+
+    .like {
+        font-size: 17px;
+        float: right;
+        margin-right: 10px;
+        margin-left: 0;
+    }
+
+    .comment {
+        font-size: 17px;
+        float: left;
+        margin-right: 10px;
+        margin-left: 0;
+    }
 }
+
+.create-comment {
+    margin-bottom: 30px;
+
+    [class^=col-] {
+        padding-left: 0;
+    }
+}
+/*.create-comment [class^=col-] {
+    padding-left: 0;
+}*/
 
 @media(max-width: 375px) {
     .blog-preview-page {

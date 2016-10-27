@@ -38,7 +38,7 @@
                     </div>
                     <div class="comments">
                         <div class="comments-title">
-                            <h4>Комментарии (6)</h4>
+                            <h4>Комментарии (2)</h4>
                         </div>
                         <div class="comments-collection">
                             <div class="comment-one">
@@ -46,8 +46,9 @@
                                         <img/>
                                     </div>*@
                                 @*<div class="comment-body">*@
-                                <div class="comment-author">
-                                    Автор комментария | 1.11.2016
+                                <div class="comment-details">
+                                    <span class="author-name">Дэвид Вильсон </span> |
+                                    <span class="date-comment">1.11.2016 22:12 </span>
                                 </div>
                                 <div class="comment-text">
                                     Взвешиваем два любых набора по 3 шара (+1 взвешивание).
@@ -58,13 +59,12 @@
                                     <div class="like">
                                         <a>
                                             <i class="glyphicon glyphicon-heart-empty"></i>
-                                            <span>6</span>
+                                            <span>2</span>
                                         </a>
                                     </div>
                                     <div class="comment">
                                         <a>
-                                            <i class="glyphicon glyphicon-comment"></i>
-                                            <span>10</span>
+                                            <span>Ответить</span>
                                         </a>
                                     </div>
                                 </div>
@@ -76,8 +76,15 @@
                                         <img/>
                                     </div>*@
                                 @*<div class="comment-body">*@
-                                <div class="comment-author">
-                                    Автор комментария | 1.11.2016
+                                <div class="comment-details">
+                                    <span class="author-name">Nicolay K.L. </span> |
+                                    <span class="date-comment">2.11.2016 22:12 </span> |
+                                    <span class="answer-comment">
+                                        Ответ
+                                        <span class="author-name">Дэвид Вильсон </span>от
+                                        <span class="date-comment">2.11.2016 22:12</span>
+                                    </span>
+
                                 </div>
                                 <div class="comment-text">
                                     Взвешиваем два любых набора по 3 шара (+1 взвешивание).
@@ -85,12 +92,61 @@
                                     Если наборы весят по-разному, то из более тяжёлого набора берём любые два шара и взвешиваем (+1 взвешивание). Если шары весят одинаково, то тяжёлый шар – третий из набора, который не взвешивали. Иначе тяжёлый шар – тот который больше весит.
                                 </div>
                                 <div class="comment-info">
-
+                                    <div class="like">
+                                        <a>
+                                            <i class="glyphicon glyphicon-heart-empty"></i>
+                                            <span>3</span>
+                                        </a>
+                                    </div>
+                                    @*<div class="comment">
+                                            <a>
+                                                <i class="glyphicon glyphicon-comment"></i>
+                                                <span>0</span>
+                                            </a>
+                                        </div>*@
                                 </div>
                                 @*</div>*@
 
                             </div>
                         </div>
+                    </div>
+                    <div class="create-comment" id="comment-creation">
+                        @using (Ajax.BeginForm("CreateTestimonial", "Testimonial", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "comment-creation", OnSuccess = "alert('cscs')", }, new { @class = "", @id = "requestForm", role = "form" })) {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            <div class="title-form">
+                                @* <h2 class="text-uppercase">@Model.Title</h2>*@
+                                <h2>Добавить комментарий</h2>
+                            </div>
+                            @*<div class="text-center add-text">
+                                    <h4>@Model.SubTitle</h4>
+                                </div>*@
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @*<label class="sr-only">@Model.PhName</label>*@
+                                    @*@Html.LabelFor(m => m.PhName, new { @class = "col-md-3 control-label" })*@
+                                    @* @Html.TextBoxFor(m => m.RequestViewModel.Name, new { @class = "form-control", @id = "inputName", @placeholder = Model.PhName })*@
+                                    <input type="text" class="form-control" id="inputName" placeholder="ФИО" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @*<label class="sr-only">@Model.PhEmail</label>*@
+                                    @*@Html.TextBoxFor(m => m.RequestViewModel.Email, new { @class = "form-control", @id = "inputEmail", @placeholder = Model.PhEmail })*@
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Адрес электронной почты">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @*<label class="sr-only">@Model.PhTestimonial</label>*@
+                                    @*@Html.TextAreaFor(m => m.RequestViewModel.Description, new { @class = "form-control", @id = "inputDescription", @placeholder = Model.PhDescription })*@
+                                    <textarea class="form-control" id="inputDescription" placeholder="Ответ"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 form-group button">
+                                <input type="submit" class="btn" value="Отправить" />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
