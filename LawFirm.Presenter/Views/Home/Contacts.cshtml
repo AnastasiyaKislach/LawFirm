@@ -1,0 +1,97 @@
+﻿@using LawFirm.Presenter.Models;
+@model ContactsViewModel
+
+@{
+    ViewBag.Title = "Контакты";
+}
+
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div class="container body-content">
+    <div class="row inquiries-container">
+    @Html.Partial("_FeedBack", new FeedBackViewModel())
+
+
+        <div class="col-md-offset-1 col-md-5 contact-info-block">
+            <div class="contacts-title">
+                <h4>Контактная информация</h4>
+            </div>
+            <ul class="contacts-list">
+                <li>
+                    <div class="glyphicon-box">
+                        <i class="glyphicon glyphicon-earphone"></i>
+                    </div>
+                    <div class="text-box">
+                        @if (@ViewBag.AppSettings.PhoneNumber1 != null) {
+                            <span> @ViewBag.AppSettings.PhoneNumber1 </span><br />}
+
+                        @if (@ViewBag.AppSettings.PhoneNumber2 != null) {
+                            <span> @ViewBag.AppSettings.PhoneNumber2 </span><br />}
+
+                        @if (@ViewBag.AppSettings.PhoneNumber3 != null) {
+                            <span> @ViewBag.AppSettings.PhoneNumber3 </span>}
+                    </div>
+                </li>
+                <li>
+                    <div class="glyphicon-box">
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                    </div>
+                    <div class="text-box">
+                        <span> @ViewBag.AppSettings.City</span>
+                        <br />
+                        <span> @ViewBag.AppSettings.Address</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="glyphicon-box">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </div>
+                    <div class="text-box">
+                        <span> @ViewBag.AppSettings.Email</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="glyphicon-box">
+                        <i class="glyphicon glyphicon-time"></i>
+                    </div>
+                    <div class="text-box">
+                        @if (@ViewBag.AppSettings.WorkingHours1 != null) {
+                            <span> @ViewBag.AppSettings.WorkingHours1 </span><br />}
+
+                        @if (@ViewBag.AppSettings.WorkingHours2 != null) {
+                            <span> @ViewBag.AppSettings.WorkingHours2 </span><br />}
+
+                        @if (@ViewBag.AppSettings.WorkingHours3 != null) {
+                            <span> @ViewBag.AppSettings.WorkingHours3 </span><br />}
+                    </div>
+                </li>
+            </ul>
+        </div>
+      @*@Html.Partial("ContactForm", Model)*@
+    </div>
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2393.889898885571!2d26.010473115830358!3d53.13012197993428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46d8cfdbfcc459ad%3A0xc6c0eb928ff64542!2z0JrQvtC80YHQvtC80L7Qu9GM0YHQutCw0Y8g0YPQuy4gMTEsINCR0LDRgNCw0L3QvtCy0LjRh9C4!5e0!3m2!1sru!2sby!4v1476105668924"></iframe>
+    </div>
+</div>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+    function initialize() {
+        map = new google.maps.Map(document.getElementById('map-container'), {
+            zoom: 12,
+            center: { lat: 53.10, lng: 26 }
+            //disableDefaultUI: true
+        });
+        var marker = new google.maps.Marker({
+            position: { lat: 53.10, lng: 26 },
+            map: map,
+            title: 'LawFirm'
+        });
+    }
+
+    initialize();
+</script>-->

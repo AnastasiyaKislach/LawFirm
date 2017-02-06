@@ -1,0 +1,32 @@
+﻿@model LawFirm.Presenter.Models.BlogViewModels.CommentFormViewModel
+
+<div class="create-comment" id="comment-creation">
+    @using (Ajax.BeginForm("CreateComment", "Blog", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "comment-creation", OnSuccess = "alert('cscs')", }, new { @class = "", @id = "requestForm", role = "form" })) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="title-form">
+            <h2>Добавить комментарий</h2>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.IdUser, new { @class = "form-control", @id = "Author", @placeholder = "ФИО" }) @*что делать!???*@
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email", @placeholder = Model.Email })
+                <input type="email" class="form-control" id="email" placeholder="Адрес электронной почты">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+               @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @id = "inputDescription", @placeholder = Model.Text })
+                <textarea class="form-control" id="inputDescription" placeholder="Ответ"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-12 form-group button">
+            <input type="submit" class="btn" value="Отправить" />
+        </div>
+    }
+</div>
+

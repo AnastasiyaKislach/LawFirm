@@ -1,0 +1,59 @@
+﻿@using LawFirm.Presenter.Models
+@model ContactsViewModel
+
+<div class="col-md-3 footer-block">
+    <div class="shortblock">
+        <h4>Контакты</h4>
+        <ul class="footer-contacts-list">
+            <li>
+                <div class="footerlist-glyphicon">
+                    <i class="glyphicon glyphicon-earphone"></i>
+                </div>
+                <div class="footerlist-text">
+                    @if (@Model.PhoneNumber1 != null) {
+                        <span> @Model.PhoneNumber1 </span><br />}
+
+                    @if (@Model.PhoneNumber2 != null) {
+                        <span> @Model.PhoneNumber2 </span><br />}
+
+                    @if (@Model.PhoneNumber3 != null) {
+                        <span> @Model.PhoneNumber3 </span>}
+                </div>
+            </li>
+            <li>
+                <div class="footerlist-glyphicon">
+                    <i class="glyphicon glyphicon-map-marker"></i>
+                </div>
+                <div class="footerlist-text">
+                    <span> @Model.City</span>
+                    <br />
+                    <span> @Model.Address</span>
+                </div>
+            </li>
+            <li>
+                <div class="footerlist-glyphicon">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                </div>
+                <div class="footerlist-text">
+                    <span> @Model.Email</span>
+                </div>
+            </li>
+            <li>
+                <div class="footerlist-glyphicon">
+                    <i class="glyphicon glyphicon glyphicon-time"></i>
+                </div>
+                <div class="footerlist-text">
+                    @if (@Model.WorkingHours1 != null) {
+                        <span> @Model.WorkingHours1 </span><br />}
+
+                    @if (@Model.WorkingHours2 != null) {
+                        <span> @Model.WorkingHours2 </span><br />}
+
+                    @if (@Model.WorkingHours3 != null) {
+                        <span> @Model.WorkingHours3 </span><br />}
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+

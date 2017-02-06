@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using LawFirm.Presenter.Models;
 
 namespace LawFirm.Presenter.Controllers {
-	public class ContactsController : Controller {
+	public class ContactsController : BaseController {
 		// GET: Contacts
 		public ActionResult Index() {
 			return View();

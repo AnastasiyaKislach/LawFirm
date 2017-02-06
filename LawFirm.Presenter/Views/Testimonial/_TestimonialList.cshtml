@@ -1,0 +1,7 @@
+﻿@model IEnumerable<LawFirm.Presenter.Models.TestimonialViewModels.TestimonialViewModel>
+
+<div class="row">
+    @foreach (var item in Model) {
+        @Html.Partial("_Testimonial", item)
+    }
+</div>

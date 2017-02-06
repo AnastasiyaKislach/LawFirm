@@ -1,0 +1,43 @@
+﻿@model LawFirm.Presenter.Models.FeedBackViewModel
+
+<div class="col-md-6 form-block">
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <h4>Форма обратной связи</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })*@
+                    <label class="control-label">ФИО</label>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })*@
+                    <label class="control-label">Адрес электронной почты</label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label" })*@
+                    <label class="control-label">Контактный телефон</label>
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label" })*@
+                    <label class="control-label">Сообщение</label>
+                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control", @id = "inputDescription" })
+                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group upload-box">
+                    <input type="file" multiple="multiple" name="files[]" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Отправить" class="btn btn-default" />
+                </div>
+    }
+</div>
+

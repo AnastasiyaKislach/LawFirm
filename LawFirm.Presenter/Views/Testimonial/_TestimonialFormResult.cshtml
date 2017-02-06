@@ -1,0 +1,14 @@
+﻿@model bool
+
+<div class="text-center result">
+    @if (Model)
+    {
+        <h1>Отзыв успешно принят!</h1>
+    }
+    else {
+        <h1>Произошла ошибка!</h1>
+        <div class="text-center">
+            @Ajax.ActionLink("Попробовать еще раз", "TestimonialForm", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "testimonial-creation" })
+        </div>
+    }
+</div>

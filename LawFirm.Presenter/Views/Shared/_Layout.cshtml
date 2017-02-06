@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@ViewBag.Title – приложение ASP.NET</title>
+    <title>Лилия Дробыш - Ваш адвокат</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -30,8 +30,8 @@
                 <li>@Html.ActionLink("Дела", "Index", "Practice")</li>
                 <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
                 <li>@Html.ActionLink("Отзывы", "Index", "Testimonial")</li>
-                <li>@Html.ActionLink("FAQ's", "Index", "Question")</li>
-                <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                <li>@Html.ActionLink("ЧаВо", "Index", "Question")</li>
+                <li>@Html.ActionLink("Контакты", "Contacts", "Home")</li>
                 @Html.Partial("_LoginPartial")
             </ul>
         </div>
@@ -42,16 +42,16 @@
     @*<hr />*@
 </div>
 <div class="footer">
-    <div class="container">
+    <div class="container row">
         <div class="col-md-3 footer-block">
             <div class="shortblock">
                 <h4>Разделы</h4>
                 <ul class="menu">
-                    <li><a class="">Обо мне</a></li>
-                    <li><a class="">Дела</a></li>
-                    <li><a class="">Блог</a></li>
-                    <li><a class="">Отзывы</a></li>
-                    <li><a class="">FAQ's</a></li>
+                    <li>@Html.ActionLink("Обо мне", "About", "Home")</li>
+                    <li>@Html.ActionLink("Дела", "Index", "Practice")</li>
+                    <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
+                    <li>@Html.ActionLink("Отзывы", "Index", "Testimonial")</li>
+                    <li>@Html.ActionLink("ЧаВо", "Index", "Question")</li>
                 </ul>
             </div>
         </div>
@@ -64,9 +64,14 @@
                             <i class="glyphicon glyphicon-earphone"></i>
                         </div>
                         <div class="footerlist-text">
-                            <span> +375 163 411885 </span>
-                            <br/>
-                            <span> +375 29 1658893 </span>
+                            @if (@ViewBag.AppSettings.PhoneNumber1 != null) {
+                                <span> @ViewBag.AppSettings.PhoneNumber1 </span><br />}
+
+                            @if (@ViewBag.AppSettings.PhoneNumber2 != null) {
+                                <span> @ViewBag.AppSettings.PhoneNumber2 </span><br />}
+
+                            @if (@ViewBag.AppSettings.PhoneNumber3 != null) {
+                                <span> @ViewBag.AppSettings.PhoneNumber3 </span>}
                         </div>
                     </li>
                     <li>
@@ -74,9 +79,9 @@
                             <i class="glyphicon glyphicon-map-marker"></i>
                         </div>
                         <div class="footerlist-text">
-                            <span> г. Барановичи</span>
-                            <br/>
-                            <span> ул. Комсомольская, 11</span>
+                            <span> @ViewBag.AppSettings.City</span>
+                            <br />
+                            <span> @ViewBag.AppSettings.Address</span>
                         </div>
                     </li>
                     <li>
@@ -84,7 +89,7 @@
                             <i class="glyphicon glyphicon-envelope"></i>
                         </div>
                         <div class="footerlist-text">
-                            <span> lili@gmail.com</span>
+                            <span> @ViewBag.AppSettings.Email</span>
                         </div>
                     </li>
                     <li>
@@ -92,9 +97,14 @@
                             <i class="glyphicon glyphicon glyphicon-time"></i>
                         </div>
                         <div class="footerlist-text">
-                            <span> пн.-пт.: 09:00 - 18:00</span>
-                            <br/>
-                            <span> сб.-вс.: выходной</span>
+                            @if (@ViewBag.AppSettings.WorkingHours1 != null) {
+                                <span> @ViewBag.AppSettings.WorkingHours1 </span><br />}
+
+                            @if (@ViewBag.AppSettings.WorkingHours2 != null) {
+                                <span> @ViewBag.AppSettings.WorkingHours2 </span><br />}
+
+                            @if (@ViewBag.AppSettings.WorkingHours3 != null) {
+                                <span> @ViewBag.AppSettings.WorkingHours3 </span><br />}
                         </div>
                     </li>
                 </ul>
@@ -105,8 +115,7 @@
                 <h4>Обо мне</h4>
                 <div class="">
                     <p>
-                        Maecenas etos sit amet, consectetur adipis cing elit. Terminal volutpat rutrum metro amet sollicitudin interdum.
-                        Ante tellus gravida mollis tellus neque vitae elit. Mauris adipiscing mauris...
+                        @ViewBag.AppSettings.About
                     </p>
                 </div>
             </div>

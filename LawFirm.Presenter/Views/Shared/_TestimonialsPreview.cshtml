@@ -1,11 +1,11 @@
-﻿@model LawFirm.Presenter.Models.TestimonialsPreviewViewModel
+﻿@model LawFirm.Presenter.Models.TestimonialViewModels.TestimonialView
 
 <div class="testimonials-preview-block">
     <div class="title-practice text-center">
-        <h2>@Model.Title</h2>
+        <h2>Отзывы клиентов</h2>
     </div>
     <div class="reference text-center">
-        <a href="@Model.ButtonLink">@Model.ButtonText</a>
+        <a href="@Url.Action("Index", "Testimonial", new {area = ""})">Перейти к полному списку</a>
         <i class="glyphicon glyphicon-arrow-right"></i>
     </div>
     <div class="row preview-block client-say">

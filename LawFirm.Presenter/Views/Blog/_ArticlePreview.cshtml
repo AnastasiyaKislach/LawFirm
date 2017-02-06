@@ -1,0 +1,36 @@
+﻿
+@model LawFirm.Presenter.Models.BlogViewModels.ArticleViewModel
+
+
+<div class="item-container">
+    <div class="img-preview">
+        <img src="@Model.ImagePath" class="img-responsive" />
+    </div>
+    <div class="details">
+        <div class="data">@Model.CreationTime</div>
+        <div class="like">
+            <a>
+                <i class="glyphicon glyphicon-heart-empty"></i>
+                @if (Model.Likes != null) {
+                    <span>@Model.Likes.Count()</span>}
+            </a>
+        </div>
+        <div class="comment">
+            <a>
+                <i class="glyphicon glyphicon-comment"></i>
+                @if (Model.Comments != null) {
+                    <span>@Model.Comments.Count()</span>}
+
+            </a>
+        </div>
+    </div>
+    <div class="title text-uppercase">
+        <a href="@Url.Action("Details", "Blog", new {id = Model.Id})">@Model.Title</a>
+    </div>
+    <div class="short-text">
+        <p>
+            @Model.Text
+            <a> → </a>
+        </p>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿namespace LawFirm.Presenter.Models {
+﻿namespace LawFirm.Presenter.Models.PracticeViewModels {
 	public class PracticeViewModel {
 		public int Id { get; set; }
 		public string Title { get; set; }

@@ -1,0 +1,29 @@
+﻿@model LawFirm.Presenter.Models.TestimonialViewModels.TestimonialFormViewModel
+
+<div id="testimonial-creation" class="form">
+    @using (Ajax.BeginForm("CreateTestimonial", "Testimonial", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "testimonial-creation", OnSuccess = "", }, new { @class = "", @id = "requestForm", role = "form" })) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="text-center title-form">
+            <h2 class="text-uppercase">Оставьте свой отзыв</h2>
+        </div>
+            <div class="col-md-offset-1 col-md-5">
+                <div class="form-group text-center">
+                    @Html.TextBoxFor(m => m.Author, new { @class = "form-control", @id = "author", @placeholder = "ФИО" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email", @placeholder = "Адрес электронной почты" })
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-10">
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @id = "inputArea", @placeholder = "Сообщение" })
+                </div>
+            </div>
+            <div class="col-md-offset-5 col-md-7 form-group button">
+                <input type="submit" class="btn btn-success-own" value="Отправить" />
+            </div>
+    }
+</div>

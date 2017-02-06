@@ -1,17 +1,17 @@
-﻿@model LawFirm.Presenter.Models.PracticePreviewViewModel
+﻿@model LawFirm.Presenter.Models.PracticeViewModels.PracticeView
 
 <div class="practice-areas-block">
     <div class="text-center">
-        <h2>@Model.Title</h2>
+        <h2>Области практики</h2>
     </div>
     <div class="reference text-center">
-        <a href="@Model.ButtonLink">@Model.ButtonText</a>
+        <a href="@Url.Action("Index","Practice")">Перейти к полному списку</a>
         <i class="glyphicon glyphicon-arrow-right"></i>
     </div>
     <div class="row preview-block">
         @foreach (var item in Model.Practices) {
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 square">
-                <a href="@Url.Action("Details", "Practice", new {area = ""})" style='background-image: url(@item.ImagePath)'>
+                <a href="@Url.Action("Details", "Practice", new {id = item.Id})" style='background-image: url(@item.ImagePath)'>
                     <div class="back-shadow">
                         <p>@item.Title</p>
                     </div>

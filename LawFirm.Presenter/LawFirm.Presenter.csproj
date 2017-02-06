@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -158,35 +159,45 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PracticeController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\ConsultationController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TestimonialController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AboutViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BlogPreviewViewModel.cs" />
-    <Compile Include="Models\BlogViewModel.cs" />
-    <Compile Include="Models\CallMeBlockViewModel.cs" />
+    <Compile Include="Models\BlogViewModels\BlogView.cs" />
+    <Compile Include="Models\BlogViewModels\ArticleViewModel.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\BlogViewModels\CommentViewModel.cs" />
+    <Compile Include="Models\BlogViewModels\CommentFormViewModel.cs" />
+    <Compile Include="Models\ContactsViewModel.cs" />
     <Compile Include="Models\FeedBackViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\BlogViewModels\LikeViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PracticePreviewViewModel.cs" />
-    <Compile Include="Models\PracticeViewModel.cs" />
+    <Compile Include="Models\PracticeViewModels\PracticeView.cs" />
+    <Compile Include="Models\PracticeViewModels\PracticeViewModel.cs" />
     <Compile Include="Models\ConsultationPreviewViewModel.cs" />
     <Compile Include="Models\ConsultationViewModel.cs" />
+    <Compile Include="Models\QuestionsView.cs" />
+    <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\SliderViewModel.cs" />
-    <Compile Include="Models\TestimonialsPreviewViewModel.cs" />
-    <Compile Include="Models\TestimonialsViewModel.cs" />
+    <Compile Include="Models\TestimonialViewModels\TestimonialFormViewModel.cs" />
+    <Compile Include="Models\TestimonialViewModels\TestimonialView.cs" />
+    <Compile Include="Models\TestimonialViewModels\TestimonialViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -210,6 +221,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\main.less" />
     <Content Include="Content\home.less" />
+    <Content Include="Content\StyleSheet1.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\About\_DSC0206.jpg" />
     <Content Include="Images\Blog\Blog-photos.jpg" />
@@ -242,8 +254,11 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="webpack.config.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -255,7 +270,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Contacts.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
@@ -290,17 +305,29 @@
     <Content Include="Views\Shared\_PracticePreview.cshtml" />
     <Content Include="Views\Shared\_TestimonialsPreview.cshtml" />
     <Content Include="Views\Shared\_BlogPreview.cshtml" />
-    <Content Include="Views\Shared\_Consultation.cshtml" />
-    <Content Include="Views\Consultation\ConsultationRequest.cshtml" />
+    <Content Include="Views\Shared\_ConsultationForm.cshtml" />
     <Content Include="Views\Practice\Details.cshtml" />
     <Content Include="Views\Shared\_ConsultationResult.cshtml" />
-    <Content Include="Views\Contacts\Index.cshtml" />
-    <Content Include="Views\Shared\_CreateTestimonialResult.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Blog\_CommentFormResult.cshtml" />
+    <Content Include="Views\Testimonial\_Testimonial.cshtml" />
+    <Content Include="Views\Testimonial\_TestimonialList.cshtml" />
+    <Content Include="Views\Testimonial\_TestimonialForm.cshtml" />
+    <Content Include="Views\Testimonial\_TestimonialFormResult.cshtml" />
+    <Content Include="Views\Blog\_CommentForm.cshtml" />
+    <Content Include="Views\Blog\_Article.cshtml" />
+    <Content Include="Views\Shared\_Contacts.cshtml" />
+    <Content Include="Views\Shared\_About.cshtml" />
+    <Content Include="Views\Home\_FeedBack.cshtml" />
+    <Content Include="Views\Home\ContactForm.cshtml" />
+    <Content Include="Views\Blog\_ArticlePreview.cshtml" />
+    <Content Include="Views\Blog\_ArticlePreviewLess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

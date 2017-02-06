@@ -1,0 +1,16 @@
+﻿@model LawFirm.Presenter.Models.TestimonialViewModels.TestimonialViewModel
+    
+<div class="col-md-4 testimonials-container">
+    <div class="testimonial-block">
+        <div class="author">
+            <h4>@Model.Author</h4>
+        </div>
+        <div class="testimonial-text">
+            <p>@Model.Text</p>
+        </div>
+        <div class="break">—</div>
+        <div class="date">
+            <p>@Model.CreationTime.Date.ToShortDateString()</p>
+        </div>
+    </div>
+</div>

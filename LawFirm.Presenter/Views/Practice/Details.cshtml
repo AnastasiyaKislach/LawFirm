@@ -1,105 +1,17 @@
-﻿@model LawFirm.Presenter.Models.PracticeViewModel
-
-@{
-    ViewBag.Title = "Детали. Название области права";
-}
-
-
+﻿@model LawFirm.Presenter.Models.PracticeViewModels.PracticeViewModel
 
 <div class="title-page-wrap">
     <div class="container">
-        <h2 class="page-title">@ViewBag.Title</h2>
+        <h2 class="page-title">@Model.Title</h2>
     </div>
 </div>
 <div class="container body-content">
     <div class="row">
         <div class="practice-img">
-            <img src="~/Images/PracticeArea/bodywork-damage.jpg" class="img-responsive" />
+            <img src="/@Model.ImagePath" class="img-responsive" />
         </div>
         <div class="practice-text">
-            <p>
-                Обычному человеку очень сложно разобраться в тонкостях действующего законодательства Республики Беларусь, регулирующего правоотношения, возникающие в результате дорожно-транспортных происшествий.
-                Большое значение имеет вопрос установления вины водителя или пешехода попавшего в ДТП или ее отсутствия, так как от этого зависит, не только кто будет возмещать причиненный после ДТП ущерб, но и кто будет нести предусмотренную законом ответственность.
-                Поскольку дорожное происшествие приводит к эмоциональному потрясению, то участник ДТП в большинстве случаев не может объективно оценивать сложившуюся ситуацию и соответственно принимать верные решения. В таких случаях необходима консультация специалиста. Это оградит Вас от непоправимых ошибок, которые могут ввести в заблуждение Вас, а также органы, проводящих расследование.
-                Мы можем помочь решить все возникающие вопросы, связанные с ДТП в административном, уголовном или гражданском процессе, а также в спорах со страховыми компаниями.
-                В случае, если Вы не согласны с принятым в отношении Вас решениям госавтоинспекцией, страховой компанией или судом и намерены его обжаловать, то обращаем Ваше внимание, что законом предусмотрены сроки для обжалования постановлений и решений.
-                Чем раньше Вы обратитесь к адвокату, тем больше получить положительный результат.
-            </p>
-            <p>
-                Адвокат по ДТП окажет Вам следующие виды юридической помощи:
-            </p>
-            <ol>
-                
-                <li>Консультирование как водителей, так и пешеходов.</li>
-                <li>Обжалование решений госавтоинспекции, суда, нарушающих ваши права.</li>
-                <li>Представление интересов в госавтоинспекции, страховой компании.</li>
-                <li>Представление интересов при производстве отдельных процессуальных действий (автотехническая экспертиза, автодорожная экспертиза .</li>
-                <li>Составление исковых заявлений и др. документов правового характера.</li>
-                <li>
-                    Оказание всех видов юридической помощи по:
-                    <ul>
-                        <li> * делам об административных правонарушениях в области дорожного движения;</li>
-                        <li> * по уголовным делам, вытекающие из нарушения правил дорожного движения;</li>
-                        <li>* по гражданским делам о возмещении вреда, причиненного жизни, здоровью и имуществу в результате дорожно-транспортного происшествия</li>
-                    </ul>
-                </li>
-            </ol>
-            <p>
-                Участие адвоката на всех стадиях предварительного расследования дела, позволяет объективно проанализировать сложившуюся ситуацию, доказательства по делу, заявить мотивированные ходатайства и, в конечном итоге, выработать позицию по делу и стратегию защиты клиента.
-            </p>
-        </div>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                            Collapsible Group 1
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                            Collapsible Group 2
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                            Collapsible Group 3
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
-                    </div>
-                </div>
-            </div>
+            @Html.Raw(Model.Text)
         </div>
     </div>
 </div>
