@@ -41,9 +41,21 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Article.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Consultation.cs" />
+    <Compile Include="Entities\Like.cs" />
+    <Compile Include="Entities\Practice.cs" />
+    <Compile Include="Entities\Type.cs" />
+    <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Slider.cs" />
+    <Compile Include="Entities\Testimonial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
