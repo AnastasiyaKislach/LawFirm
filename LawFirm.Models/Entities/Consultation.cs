@@ -16,7 +16,7 @@ namespace LawFirm.Models.Entities {
 
 		public DateTime CreationTime { get; set; }
 
-		public int IdPracticeArea { get; set; }
+		public int PracticeId { get; set; }
 		
 		public Practice Practice { get; set; }
 

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace LawFirm.Models.Entities {
 	public class Like : BaseEntity {
 
-		public int IdUser { get; set; }
+		public int ApplicationUserId { get; set; }
 
-		public int IdArticle { get; set; }
+		public int ArticleId { get; set; }
 
 		public virtual Article Article { get; set; }
 

@@ -22,10 +22,12 @@ namespace LawFirm.Presenter.Controllers {
 			//		CreationTime = DateTime.Now,
 			//		ImagePath = "~/Images/Blog/Blog-photos.jpg",
 			//		Text = "Локальный репозиторий",
-			//		IdCategory = 1
+			//		CategoryId = 2
 			//	};
 			//	Service.Add(article);
 			//}
+
+
 		}
 
 		// GET: Blog
@@ -48,7 +50,7 @@ namespace LawFirm.Presenter.Controllers {
 				Text = article.Text,
 				ImagePath = article.ImagePath,
 				CreationTime = article.CreationTime,
-				IdCategory = article.IdCategory,
+				CategoryId = article.CategoryId,
 				//Likes = article.
 			};
 			return View(vm);
@@ -94,7 +96,7 @@ namespace LawFirm.Presenter.Controllers {
 				CreationTime = model.CreationTime,
 				//Comments = model.Comments, //преобразовать надо блин
 				//Likes = model.Likes,
-				IdCategory = model.IdCategory
+				CategoryId = model.CategoryId
 			};
 		}
 	}

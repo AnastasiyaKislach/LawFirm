@@ -31,7 +31,7 @@ namespace LawFirm.Presenter.Controllers {
 					Email = model.RequestViewModel.Email,
 					Phone = model.RequestViewModel.Phone,
 					MessageText = model.RequestViewModel.MessageText,
-					IdPracticeArea = model.RequestViewModel.IdPracticeArea
+					PracticeId = model.RequestViewModel.PracticeId
 				};
 
 				Service.Add(consultation);

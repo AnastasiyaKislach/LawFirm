@@ -192,7 +192,6 @@
     <Compile Include="Models\PracticeViewModels\PracticeViewModel.cs" />
     <Compile Include="Models\ConsultationPreviewViewModel.cs" />
     <Compile Include="Models\ConsultationViewModel.cs" />
-    <Compile Include="Models\QuestionsView.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\SliderViewModel.cs" />
     <Compile Include="Models\TestimonialViewModels\TestimonialFormViewModel.cs" />

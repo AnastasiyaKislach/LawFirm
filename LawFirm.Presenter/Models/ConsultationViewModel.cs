@@ -8,7 +8,7 @@ namespace LawFirm.Presenter.Models {
 		public string Name { get; set; }
 		public string Email { get; set; }
 		public string Phone { get; set; }
-		public int IdPracticeArea { get; set; }
+		public int PracticeId { get; set; }
 		public string MessageText { get; set; }
 	}
 }

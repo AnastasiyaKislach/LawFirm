@@ -85,7 +85,7 @@ namespace LawFirm.Presenter.Controllers {
 
 		private ConsultationPreviewViewModel getRequestaConsultationPreview() {
 			return new ConsultationPreviewViewModel {
-				PracticeAreas = getPractices().Select(ToSelectListItem).ToList()
+				Practices = getPractices().Select(ToSelectListItem).ToList()
 			};
 		}
 

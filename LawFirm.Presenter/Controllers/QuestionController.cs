@@ -23,8 +23,8 @@ namespace LawFirm.Presenter.Controllers {
 			//				 "minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 			//	};
 			//	Service.Add(question);
-			//}
-		}
+			//	}
+			}
 
 		// GET: Question
 		public ActionResult Index() {

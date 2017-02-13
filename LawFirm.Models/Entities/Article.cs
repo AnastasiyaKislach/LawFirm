@@ -15,7 +15,7 @@ namespace LawFirm.Models.Entities {
 		public DateTime CreationTime { get; set; }
 
 		
-		public int IdCategory { get; set; }
+		public int CategoryId { get; set; }
 
 		public virtual Category Category { get; set; }
 

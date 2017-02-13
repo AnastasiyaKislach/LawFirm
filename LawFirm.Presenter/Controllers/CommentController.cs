@@ -19,7 +19,7 @@ namespace LawFirm.Presenter.Controllers {
 			}
 
 			bool result = true;
-
+			//необходимо извлечь пользователя
 			try {
 				Comment comment = ToModel(model);
 
@@ -40,21 +40,20 @@ namespace LawFirm.Presenter.Controllers {
 		protected CommentViewModel ToVewModel(Comment model) {
 			return new CommentViewModel {
 				Id = model.Id,
-				IdUser = model.IdUser,
+				ApplicationUserId = model.ApplicationUserId,
 				Text = model.Text,
 				CreationTime = model.CreationTime,
-				IdLinkedComment = model.IdLinkedComment,
-				IdArticle = model.IdArticle
+				LinkedCommentId = model.LinkedCommentId,
+				ArticleId = model.ArticleId
 			};
 		}
 
 		protected Comment ToModel(CommentFormViewModel model) {
 			return new Comment {
-				IdUser = model.IdUser,
 				Text = model.Text,
 				CreationTime = model.CreationTime,
-				IdLinkedComment = model.IdLinkedComment,
-				IdArticle = model.IdArticle
+				LinkedCommentId = model.LinkedCommentId,
+				ArticleId = model.ArticleId
 			};
 		}
 	}

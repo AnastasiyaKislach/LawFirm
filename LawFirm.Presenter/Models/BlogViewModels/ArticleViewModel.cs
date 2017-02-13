@@ -16,7 +16,7 @@ namespace LawFirm.Presenter.Models.BlogViewModels {
 
 		public DateTime CreationTime { get; set; }
 
-		public int IdCategory { get; set; }
+		public int CategoryId { get; set; }
 
 		public List<LikeViewModel> Likes { get; set; }
 

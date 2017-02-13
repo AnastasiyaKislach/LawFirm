@@ -12,15 +12,15 @@ namespace LawFirm.Models.Entities {
 		public DateTime CreationTime { get; set; }
 		
 
-		public int IdUser { get; set; }
+		public int ApplicationUserId { get; set; }
 
 		public virtual List<Like> Likes { get; set; }
 
-		public int IdLinkedComment { get; set; }
+		public int LinkedCommentId { get; set; }
 
 		public virtual Comment LinkedComment { get; set; }
 
-		public int IdArticle { get; set; }
+		public int ArticleId { get; set; }
 
 		public virtual Article Article { get; set; }
 		
