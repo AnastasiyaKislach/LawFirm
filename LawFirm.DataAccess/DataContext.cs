@@ -5,7 +5,7 @@ namespace LawFirm.DataAccess {
 
 	public class DataContext : DbContext {
 
-		public virtual DbSet<Slider> Slides { get; set; }
+		public virtual DbSet<Slide> Slides { get; set; }
 
 		public virtual DbSet<Testimonial> Testimonials { get; set; }
 

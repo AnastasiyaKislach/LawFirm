@@ -1,11 +1,12 @@
 ﻿using System;
 using LawFirm.Models.Entities;
+using Microsoft.Win32;
 
 namespace LawFirm.DataAccess.Contracts {
 
 	public interface IUnitOfWork : IDisposable {
 
-		IRepository<Slider> Slides { get; }
+		IRepository<Slide> Slides { get; }
 
 		IRepository<Testimonial> Testimonials { get; }
 
@@ -22,6 +23,8 @@ namespace LawFirm.DataAccess.Contracts {
 		IRepository<Consultation> Consultations { get; }
 
 		IRepository<Question> Questions { get; }
+
+		IRepository<Category> Categories { get; }
 
 		void Save();
 	}

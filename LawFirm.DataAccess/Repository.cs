@@ -1,6 +1,8 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using LawFirm.DataAccess.Contracts;
+using System;
+using System.Linq.Expressions;
 
 namespace LawFirm.DataAccess {
 	public class Repository<TEntity> : IRepository<TEntity> where TEntity : class {
@@ -35,6 +37,10 @@ namespace LawFirm.DataAccess {
 
 		public virtual IQueryable<TEntity> GetAll() {
 			return Items;
+		}
+
+		public virtual IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) {
+			return Items.Where(predicate);
 		}
 	}
 }
