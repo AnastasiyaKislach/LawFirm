@@ -1,10 +1,6 @@
-﻿using LawFirm.DataAccess;
-using LawFirm.Models.Entities;
+﻿using LawFirm.Models.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LawFirm.BusinessLogic {
 	public class QuestionService : BaseService {
@@ -20,8 +16,7 @@ namespace LawFirm.BusinessLogic {
 			return question;
 		}
 
-
-		public void Add(Question question) {
+		public Question Add(Question question) {
 			if (question == null) {
 				throw new ArgumentNullException(nameof(question));
 			}
@@ -29,20 +24,37 @@ namespace LawFirm.BusinessLogic {
 			question.QuestionText = question.QuestionText.Trim();
 			question.Answer = question.Answer.Trim();
 
-			DataContext.Questions.Create(question);
+			Question newQuestion = DataContext.Questions.Create(question);
 			DataContext.Save();
+
+			return newQuestion;
 		}
 
-		public void Delete(int id) {
+		public Question Update(Question question)
+		{
+			if (question == null) {
+				throw new ArgumentNullException(nameof(question));
+			}
+
+			Question updateQuestion = DataContext.Questions.Update(question);
+			DataContext.Save();
+
+			return updateQuestion;
+
+		}
+
+		public Question Delete(int id) {
 			Question question = DataContext.Questions.GetById(id);
 
 			if (question != null) {
 				question.IsDeleted = true;
 			}
 
-			DataContext.Questions.Update(question);
+			Question deletedquestion = DataContext.Questions.Update(question);
 			DataContext.Save();
+
+			return deletedquestion;
 		}
-		
+
 	}
 }

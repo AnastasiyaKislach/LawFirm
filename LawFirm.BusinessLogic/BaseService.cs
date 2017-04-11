@@ -9,5 +9,9 @@ namespace LawFirm.BusinessLogic {
 		protected BaseService(string connectionString) {
 			DataContext = new UnitOfWork(connectionString);
 		}
+
+		public void Save() {
+			DataContext.Save();
+		}
 	}
 }
