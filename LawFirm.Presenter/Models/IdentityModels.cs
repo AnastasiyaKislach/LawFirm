@@ -21,7 +21,7 @@ namespace LawFirm.Presenter.Models {
 
 	public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
 		public ApplicationDbContext()
-			: base("DefaultConnection", throwIfV1Schema: false) {
+			: base("DBConnection", throwIfV1Schema: false) {
 		}
 
 		public static ApplicationDbContext Create() {

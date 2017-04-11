@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using LawFirm.Presenter.Config;
@@ -7,6 +6,7 @@ using LawFirm.Presenter.Models;
 using LawFirm.Presenter.Models.BlogViewModels;
 using LawFirm.Presenter.Models.PracticeViewModels;
 using LawFirm.Presenter.Models.TestimonialViewModels;
+using LawFirm.BusinessLogic;
 
 namespace LawFirm.Presenter.Controllers {
 	public class HomeController : BaseController {
@@ -17,10 +17,10 @@ namespace LawFirm.Presenter.Controllers {
 				Slides = getSlides().AsQueryable(),
 				PracticePreview = getPracticePreview(),
 				TestimonialsPreview = getTestimonialsPreview(),
-				BlogPreview = getBlogPreview(),
+				ArticlesPreview = getBlogPreview().AsQueryable(),
 				RequestaConsultationForm = getRequestaConsultationPreview()
 			};
-			//ViewBag.AppSettings = AppSettings;
+
 			return View(vm);
 		}
 		public ActionResult About() {
@@ -31,13 +31,24 @@ namespace LawFirm.Presenter.Controllers {
 			return View();
 		}
 
-		IEnumerable<SliderViewModel> getSlides(int count = 3) {
-			for (int i = 1; i <= count; i++) {
-				yield return new SliderViewModel { ImagePath = String.Format("{0}/Slider/{1}.jpg", AppConfig.ImagesRootPath, i) };
+		IEnumerable<SlideViewModel> getSlides(int count = 3) {
+
+			List<SlideViewModel> slides = new List<SlideViewModel>();
+
+			SlideService service = new SlideService(AppConfig.ConnectionString);
+
+			slides = service.GetAll().Take(count).Select(i => new SlideViewModel() {
+				Id = i.Id,
+				ImagePath = AppConfig.ImagesRootPath + "/Slider/" + i.ImagePath
+			}).ToList();
+
+			for (int i = 0; i < count; i++) {
+				yield return slides[i];
 			}
 		}
-		
+
 		PracticeView getPracticePreview(int count = 6) {
+
 			List<PracticeViewModel> practices = (List<PracticeViewModel>)getPractices();
 			PracticeView vm = new PracticeView {
 				Practices = practices
@@ -47,13 +58,13 @@ namespace LawFirm.Presenter.Controllers {
 
 		TestimonialView getTestimonialsPreview(int count = 4) {
 			List<TestimonialViewModel> testimonials = new List<TestimonialViewModel>();
-			for (int i = 0; i < count; i++) {
-				testimonials.Add(new TestimonialViewModel {
-					Author = "Инесса Карпинская",
-					Text = "Maecenas etos sit amet, consectetur adipis cing elit. Terminal volutpat rutrum metro amet sollicitudin interdum." +
-						"Ante tellus gravida mollis tellus neque vitae elit. Mauris adipiscing mauris..."
-				});
-			}
+
+			TestimonialService service = new TestimonialService(AppConfig.ConnectionString);
+
+			testimonials = service.GetAll().Take(count).Select(i => new TestimonialViewModel() {
+				Author = i.Author,
+				Text = i.Text
+			}).ToList();
 
 			TestimonialView vm = new TestimonialView() {
 				Testimonials = testimonials
@@ -62,45 +73,55 @@ namespace LawFirm.Presenter.Controllers {
 			return vm;
 		}
 
-		BlogView getBlogPreview(int count = 4) {
-			List<ArticleViewModel> articles = new List<ArticleViewModel>();
-			for (int i = 0; i < count; i++) {
-				articles.Add(new ArticleViewModel {
-					Title = "Дело Баскервилей",
-					Text = "Maecenas etos sit amet, consectetur adipis cing elit. Terminal volutpat rutrum metro amet sollicitudin interdum." +
-						"Ante tellus gravida mollis tellus neque vitae elit. Mauris adipiscing mauris...",
-					CreationTime = new DateTime(2016, 9, 15),
-					ImagePath = String.Format("{0}/Blog/{1}.jpg", AppConfig.ImagesRootPath, "Blog-photos")
-					//Comments = 6,
-					//Likes = 
-				});
-			}
+		List<ArticlePreviewModel> getBlogPreview(int count = 4) {
+			List<ArticlePreviewModel> articles = new List<ArticlePreviewModel>();
 
-			BlogView vm = new BlogView {
-				Articles = articles
-			};
+			ArticleService service = new ArticleService(AppConfig.ConnectionString);
 
-			return vm;
+			var articlesQuery = service.GetAll().Take(count);
+
+			articles = articlesQuery.Select(
+				i => new ArticlePreviewModel() {
+					Id = i.Id,
+					ImagePath = AppConfig.ImagesRootPath + "/Blog/" + i.ImagePath,
+					Title = i.Title,
+					Text = i.Text != "" ? (i.Text.Length > 50 ? i.Text.Substring(0, 50) : "") : "",
+					CreationTime = i.CreationTime,
+					Comments = i.Comments.Count,
+					Likes = i.Likes.Count
+				}).ToList();
+
+			LikeService likeService = new LikeService(AppConfig.ConnectionString);
+			
+
+			//for (int i = 0; i < articles.Count; i++) {
+			//	articles[i].Likes = likeService.GetAll(articles[i].Id, (int)LawFirm.Models.Entities.PublicationType.Article).ToList().Count;
+			//}
+
+			return articles;
 		}
 
 		private ConsultationPreviewViewModel getRequestaConsultationPreview() {
 			return new ConsultationPreviewViewModel {
-				Practices = getPractices().Select(ToSelectListItem).ToList()
+				Practices = getPractices().Select(ToSelectListItem)
 			};
 		}
 
 		private IEnumerable<PracticeViewModel> getPractices(int count = 6) {
 			List<PracticeViewModel> practices = new List<PracticeViewModel>();
-			for (int i = 0; i < count; i++) {
-				practices.Add(new PracticeViewModel {
-					Id = i + 1,
-					Title = "Bank And Financial",
-					Text = "",
-					ImagePath = String.Format("{0}/PracticeArea/{1}.jpg", AppConfig.ImagesRootPath, "family-sitting")
-				});
-			}
+
+			PracticeService service = new PracticeService(AppConfig.ConnectionString);
+
+			practices = service.GetAll().Take(count).Select(i => new PracticeViewModel() {
+				Id = i.Id,
+				ImagePath = AppConfig.ImagesRootPath + "/PracticeArea/" + i.ImagePath,
+				Title = i.Title,
+				Text = i.Text
+			}).ToList();
+
 			return practices;
 		}
+
 		private SelectListItem ToSelectListItem(PracticeViewModel vm) {
 			SelectListItem item = new SelectListItem() {
 				Value = vm.Id.ToString(),

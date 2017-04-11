@@ -41,7 +41,7 @@ namespace LawFirm.Presenter.Controllers {
 				Id = practice.Id,
 				Title = practice.Title,
 				Text = practice.Text,
-				ImagePath = practice.ImagePath
+				ImagePath = AppConfig.PracticeImagesPath + practice.ImagePath
 			};
 			return View(vm);
 		}
@@ -51,7 +51,7 @@ namespace LawFirm.Presenter.Controllers {
 				Id = model.Id,
 				Title = model.Title,
 				Text = model.Text,
-				ImagePath = model.ImagePath
+				ImagePath = AppConfig.PracticeImagesPath + model.ImagePath
 			};
 		}
 	}

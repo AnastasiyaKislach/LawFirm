@@ -2,7 +2,7 @@
 @model LawFirm.Presenter.Models.ConsultationPreviewViewModel
 
 <div id="consultation-request-section" class="form">
-    @using (Ajax.BeginForm("ConsultationRequest", "Consultation", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "consultation-request-section", OnSuccess = "", }, new { @class = "", @id = "requestForm", role = "form" })) {
+    @using (Ajax.BeginForm("ConsultationRequest", "Consultation", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "consultation-request-section", OnSuccess = "alert('Привеи');", }, new { @class = "", @id = "forma", role = "form" })) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="text-center title-form">
@@ -31,7 +31,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label class="sr-only">Описание проблемы</label>
-                @Html.TextAreaFor(m => m.RequestViewModel.MessageText, new { @class = "form-control", @id = "inputDescription", @placeholder = "Описание проблемы"})
+                @Html.TextAreaFor(m => m.RequestViewModel.MessageText, new { @class = "form-control", @id = "inputDescription", @placeholder = "Описание проблемы\n Укажите также, пожалуйста, желаемое время и день консультации."})
             </div>
         </div>
         <div class="col-md-offset-5 col-md-7 form-group button">

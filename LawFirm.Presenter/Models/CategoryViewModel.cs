@@ -7,6 +7,6 @@ namespace LawFirm.Presenter.Models {
 
 		public string Title { get; set; }
 
-		public List<ArticleViewModel> ArticleViewModels { get; set; }
+		public int Articles { get; set; }
 	}
 }

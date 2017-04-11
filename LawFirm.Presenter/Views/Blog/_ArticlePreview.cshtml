@@ -1,25 +1,25 @@
 ﻿
-@model LawFirm.Presenter.Models.BlogViewModels.ArticleViewModel
+@model LawFirm.Models.ArticleInfo
 
 
 <div class="item-container">
     <div class="img-preview">
-        <img src="@Model.ImagePath" class="img-responsive" />
+        <img src="/@Model.ImagePath" class="img-responsive" />
     </div>
     <div class="details">
-        <div class="data">@Model.CreationTime</div>
+        <div class="data">
+            @Model.CreationTime.Day.@Model.CreationTime.Month.@Model.CreationTime.Year
+        </div>
         <div class="like">
             <a>
                 <i class="glyphicon glyphicon-heart-empty"></i>
-                @if (Model.Likes != null) {
-                    <span>@Model.Likes.Count()</span>}
+                <span>@Model.Likes</span>
             </a>
         </div>
         <div class="comment">
             <a>
                 <i class="glyphicon glyphicon-comment"></i>
-                @if (Model.Comments != null) {
-                    <span>@Model.Comments.Count()</span>}
+                <span>@Model.Comments</span>
 
             </a>
         </div>
@@ -30,7 +30,7 @@
     <div class="short-text">
         <p>
             @Model.Text
-            <a> → </a>
+            <a href="@Url.Action("Details", "Blog", new {id = Model.Id})"> → </a>
         </p>
     </div>
 </div>

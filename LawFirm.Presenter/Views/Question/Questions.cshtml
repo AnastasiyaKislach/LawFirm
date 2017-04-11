@@ -1,0 +1,71 @@
+﻿@using LawFirm.Presenter.Models
+@model List<QuestionViewModel>
+@{
+    ViewBag.Title = "Редактирование вопросов";
+}
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div class="container body-content">
+    <div class="customm-container">
+        <div class="btn-add">
+            <div class="col-sm-12 form-group button">
+                <a href="@Url.Action("Create", "Question")">
+                    <input type="button" class="btn" value="Добавить новый вопрос">
+                </a>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover table-condensed" show-filter="true">
+            <thead>
+                <colgroup>
+                    <col width="5%" />
+                    <col width="20%" />
+                    <col width="65%" />
+                    <col width="10%" />
+                </colgroup>
+                <tr>
+                    <th class="text-center">Номер</th>
+                    <th class="text-center">Вопрос</th>
+                    <th class="text-center">Ответ</th>
+                    <th class="text-center">Редактирование</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var question in Model) {
+                    <tr id="question@(question.Id)">
+                        <td class="text-center">
+                            <span>@question.Id</span>
+                        </td>
+                        <td>
+                            <span>@question.QuestionText</span>
+                            <div class="controls hidden">
+                                <input type="text" name="question.QuestionText" class="editable-input form-control input-sm" />
+                            </div>
+                        </td>
+                        <td>
+                            <span>@question.Answer</span>
+                            <div class="controls hidden">
+                                <input type="text" name="question.Answer" class="editable-input form-control input-sm" />
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "Question", new {id = question.Id})">
+                                <button class="btn btn-default btn-sm" id="pencil"><span class="glyphicon glyphicon-pencil"></span></button>
+                            </a>
+                           <a data-ajax="true" data-ajax-method="POST" data-ajax-update='' href="@Url.Action("Delete", "Question", new { id = question.Id})"
+                               data-ajax-success="lawfirm.pages.questions.removeQuestionRow(question@(question.Id))" >
+                                <button class="btn btn-danger btn-sm" id="trash" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </a>
+                        </td>
+                    </tr>}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+

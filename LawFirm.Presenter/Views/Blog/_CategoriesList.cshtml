@@ -1,0 +1,19 @@
+﻿@using LawFirm.Presenter.Models
+
+@model  IEnumerable<CategoryViewModel>
+
+
+<div class="categories">
+    <h4>Категории</h4>
+    @if (Model != null) {
+        <ul>
+            @foreach (var item in Model) {
+                <li class="clearfix">
+                    <div class="">
+                        <a class="" href="@Url.Action("CateroryArticles","Blog", new {id = item.Id})">@item.Title (@item.Articles)</a>
+                    </div>
+                </li>}
+        </ul>
+                    <div class="clearfix"></div>}
+
+</div>

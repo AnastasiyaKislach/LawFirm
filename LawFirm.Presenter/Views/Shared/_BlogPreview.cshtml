@@ -1,4 +1,4 @@
-﻿@model LawFirm.Presenter.Models.BlogView
+﻿@model IEnumerable<LawFirm.Presenter.Models.BlogViewModels.ArticlePreviewModel>
 
 <div class="blog-preview-block">
     <div class="text-center">
@@ -9,34 +9,34 @@
         <i class="glyphicon glyphicon-arrow-right"></i>
     </div>
     <div class="row preview-block">
-        @foreach (var item in Model.Articles) {
+       @for (int i = 0; i < Model.Count(); i++) {
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 item-container">
                 <div class="img-preview">
-                    <img src="@item.ImagePath" class="img-responsive" />
+                    <img src="@Model.ElementAt(i).ImagePath" class="img-responsive" />
                 </div>
                 <div class="details">
                     <div class="data">
-                        @item.CreationTime.Day.@item.CreationTime.Month.@item.CreationTime.Year
+                        @Model.ElementAt(i).CreationTime.Day.@Model.ElementAt(i).CreationTime.Month.@Model.ElementAt(i).CreationTime.Year
                     </div>
                     <div class="like">
                         <a>
                             <i class="glyphicon glyphicon-heart-empty"></i>
-                            <span>@item.Likes</span>
+                            <span>@Model.ElementAt(i).Likes</span>
                         </a>
                     </div>
                     <div class="comment">
                         <a>
                             <i class="glyphicon glyphicon-comment"></i>
-                            <span>@item.Comments</span>
+                            <span>@Model.ElementAt(i).Comments</span>
                         </a>
                     </div>
                 </div>
                 <div class="title">
-                    <a>@item.Title</a>
+                    <a href="@Url.Action("Details", "Blog", new {id = Model.ElementAt(i).Id})">@Model.ElementAt(i).Title</a>
                 </div>
                 <div class="short-text">
-                    <p>@item.Text
-                    <a> → </a>
+                    <p>@Model.ElementAt(i).Text
+                    <a href="@Url.Action("Details", "Blog", new {id = Model.ElementAt(i).Id})"> → </a>
                 </p>
             </div>
         </div>

@@ -144,7 +144,12 @@ namespace LawFirm.Presenter.Controllers {
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Register(RegisterViewModel model) {
 			if (ModelState.IsValid) {
-				var user = new ApplicationUser { UserName = model.FirstName, Email = model.Email, LastName = model.LastName, FirstName = model.FirstName };
+				var user = new ApplicationUser {
+					UserName = model.Email,
+					Email = model.Email,
+					LastName = model.LastName,
+					FirstName = model.FirstName
+				};
 				var result = await UserManager.CreateAsync(user, model.Password);
 				if (result.Succeeded) {
 					await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

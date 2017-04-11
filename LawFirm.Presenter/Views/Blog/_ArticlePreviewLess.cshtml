@@ -1,14 +1,14 @@
-﻿@model LawFirm.Presenter.Models.BlogViewModels.ArticleViewModel
+﻿@model LawFirm.Models.LastArticle
 
 <div class="item-preview-container">
     <div class="img-preview">
-        <img src="@Model.ImagePath" class="img-responsive" />
+        <img src="/@Model.ImagePath" class="img-responsive" />
     </div>
     <div class="shortest-text">
         <a class="news-title">@Model.Title</a>
         <p>
-           @Model.Text
-            <a> → </a>
+           @*@Model.Text*@
+            <a href="@Url.Action("Details", "Blog", new {id = Model.Id})"> → </a>
         </p>
     </div>
 </div>

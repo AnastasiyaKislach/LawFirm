@@ -7,19 +7,21 @@
         <div class="title-form">
             <h2>Добавить комментарий</h2>
         </div>
-        @*<div class="col-sm-6">
-                <div class="form-group">
-                    @Html.TextBoxFor(m => m.IdUser, new { @class = "form-control", @id = "Author", @placeholder = "ФИО" })
-                </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Author, new { @class = "form-control", @id = "Author", @placeholder = "ФИО" })
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email", @placeholder = "Адрес электронной почты" })
-                </div>
-        </div>*@
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email", @placeholder = Model.Email })
+                <input type="email" class="form-control" id="email" placeholder="Адрес электронной почты">
+            </div>
+        </div>
         <div class="col-sm-12">
             <div class="form-group">
-                @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @id = "inputDescription", @placeholder = "Ответ" })
+               @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @id = "inputDescription", @placeholder = Model.Text })
+                <textarea class="form-control" id="inputDescription" placeholder="Ответ"></textarea>
             </div>
         </div>
         <div class="col-sm-12 form-group button">

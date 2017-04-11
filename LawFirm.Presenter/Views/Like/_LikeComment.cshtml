@@ -1,0 +1,10 @@
+﻿@model LawFirm.Presenter.Models.BlogViewModels.LikeViewModel
+
+<div class="like" id='likeComment@(Model.PublicationId)'>
+    <a data-ajax="true" data-ajax-method="POST" data-ajax-update='#likeComment@(Model.PublicationId)'
+            href="@Url.Action("LikingComment", "Like", new { id = Model.PublicationId })"
+            class='@(Model.IsLiked ? "liked-link" : "")'>
+        <i class="glyphicon glyphicon-thumbs-up"></i>
+        <span>@Model.Count</span>
+    </a>
+</div>

@@ -2,58 +2,63 @@
 using LawFirm.Models.Entities;
 using LawFirm.Presenter.Models.CommentViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
-using LawFirm.Presenter.Models.BlogViewModels;
+using LawFirm.Presenter.Attributes;
+using LawFirm.Presenter.Config;
+using LawFirm.Presenter.Helpers;
+using Microsoft.AspNet.Identity;
 
 namespace LawFirm.Presenter.Controllers {
 	public class CommentController : BaseController {
-		public CommentService Service { get; set; }
+		protected CommentService Service;
 
+		public CommentController() {
+			Service = new CommentService(AppConfig.ConnectionString);
+		}
+		
+		[HttpPost]
+		[AuthorizeRedirect(IsJson = true)]
+		public ActionResult Create(CommentFormViewModel model) {
 
-		public ActionResult CreateComment(CommentFormViewModel model) {
 			if (!ModelState.IsValid) {
 				return PartialView("_CommentForm", model);
 			}
+			
+			string userId = User.Identity.GetUserId();
 
-			bool result = true;
-			//необходимо извлечь пользователя
 			try {
-				Comment comment = ToModel(model);
+				Comment comment = ToModel(model, userId);
+				
+				Comment newComment = Service.Add(comment);
 
-				Service.Add(comment);
-			}
-			catch {
-				result = false;
-			}
+				CommentViewModel vm = CommentHelper.ToViewModel(newComment);
 
-			return PartialView("_CommentFormResult", result);
+				return PartialView("_Comment", vm);
+			}
+			catch (Exception e) {
+				return PartialView("_CommentFormResult", e.Message);
+			}
 		}
 
-		[HttpGet]
-		public ActionResult CommentForm() {
-			return PartialView("_CommentForm", new CommentFormViewModel());
-		}
-
-		protected CommentViewModel ToVewModel(Comment model) {
-			return new CommentViewModel {
-				Id = model.Id,
-				ApplicationUserId = model.ApplicationUserId,
-				Text = model.Text,
-				CreationTime = model.CreationTime,
-				LinkedCommentId = model.LinkedCommentId,
-				ArticleId = model.ArticleId
+		
+		public ActionResult Reply(int idArticle, int idComment) {
+			if (!User.Identity.IsAuthenticated) {
+				return Json(new { statusCode = HttpStatusCode.Redirect, redirectUrl = Url.Action("Login", "Account") });
+			}
+			CommentFormViewModel vm = new CommentFormViewModel() {
+				ArticleId = idArticle,
+				ParentCommentId = idComment
 			};
+			return PartialView("_ReplyForm", vm);
 		}
 
-		protected Comment ToModel(CommentFormViewModel model) {
+		protected Comment ToModel(CommentFormViewModel model, string userId) {
 			return new Comment {
 				Text = model.Text,
-				CreationTime = model.CreationTime,
-				LinkedCommentId = model.LinkedCommentId,
-				ArticleId = model.ArticleId
+				ArticleId = model.ArticleId ?? 0,
+				ApplicationUserId = userId,
+				ParentCommentId = model.ParentCommentId
 			};
 		}
 	}

@@ -1,0 +1,29 @@
+﻿@model LawFirm.Presenter.Models.CommentViewModels.CommentFormViewModel
+
+<div id="reply-form" class="create-comment">
+    @using (Ajax.BeginForm("Create", "Comment", null,
+                        new AjaxOptions {
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.ReplaceWith,
+                            UpdateTargetId = "reply-form",
+                            OnSuccess = "lawfirm.pages.blog.replyCreateHandler(data)"
+                        },
+                                new { @class = "", @id = "forma", role = "form" })) {
+        @Html.AntiForgeryToken()
+
+        <div class="title-form">
+            <h2>Ответить</h2>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                @Html.HiddenFor(m => m.ArticleId)
+                @Html.HiddenFor(m => m.ParentCommentId)
+                @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @id = "inputReply", @placeholder = "Ответ" })
+                @Html.ValidationMessageFor(m => m.Text)
+            </div>
+        </div>
+        <div class="col-sm-12 form-group button">
+            <input type="submit" class="btn" value="Отправить" />
+        </div>
+    }
+</div>

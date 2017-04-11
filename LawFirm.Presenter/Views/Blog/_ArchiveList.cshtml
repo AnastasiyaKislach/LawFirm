@@ -1,0 +1,17 @@
+﻿
+@using LawFirm.Presenter.Models.BlogViewModels
+@model IEnumerable<ArchiveViewModel>
+
+<div class="archive">
+    <h4>Архив новостей</h4>
+    <ul>
+        @foreach (ArchiveViewModel item in Model) {
+            <li class="clearfix">
+                <div class="">
+                    <a class="" href="@Url.Action("ArchiveArticles", "Blog", new { month = item.MonthNum, year = item.Year})">@item.Month @item.Year</a>
+                </div>
+            </li>
+           }
+    </ul>
+    <div class="clearfix"></div>
+</div>

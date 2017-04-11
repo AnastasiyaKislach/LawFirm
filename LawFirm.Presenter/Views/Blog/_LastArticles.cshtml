@@ -1,0 +1,12 @@
+﻿@using LawFirm.Models
+@model IEnumerable<LastArticle>
+
+<div class="recent-news">
+    <h4>Последние новости</h4>
+    <ul>
+        @foreach (LastArticle item in Model) {
+            <li class="clearfix">
+                @Html.Partial("_ArticlePreviewLess", item)
+            </li>}
+    </ul>
+</div>

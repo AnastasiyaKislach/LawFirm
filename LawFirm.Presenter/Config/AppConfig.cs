@@ -15,9 +15,11 @@ namespace LawFirm.Presenter.Config {
 			}
 		}
 
-		public static string ImagesRootPath { get { return ConfigurationManager.AppSettings["ImagesRootPath"]; } }
+		public static string ImagesRootPath { get { return ConfigurationManager.AppSettings["ImagesRootPath"] ?? string.Empty; } }
 
+		public static string BlogImagesPath { get { return ImagesRootPath + "/Blog/"; } }
 
+		public static string PracticeImagesPath { get { return ImagesRootPath + "/PracticeArea/"; } }
 	}
 
 }

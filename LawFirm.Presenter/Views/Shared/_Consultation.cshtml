@@ -1,0 +1,47 @@
+﻿@using LawFirm.Presenter.Models
+@model LawFirm.Presenter.Models.ConsultationPreviewViewModel
+
+<div id="consultation-request-section" class="form">
+    @using (Ajax.BeginForm("ConsultationRequest", "Consultation", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "consultation-request-section", OnSuccess = "alert('cscs')", }, new { @class = "", @id = "requestForm", role = "form" })) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="text-center title-form">
+            <h2 class="text-uppercase">@Model.Title</h2>
+        </div>
+        <div class="text-center add-text">
+            <h4>@Model.SubTitle</h4>
+        </div>
+        <div class="col-md-offset-1 col-md-4">
+            <div class="form-group text-center">
+                <label class="sr-only">@Model.PhName</label>
+                @*@Html.LabelFor(m => m.PhName, new { @class = "col-md-3 control-label" })*@
+                @Html.TextBoxFor(m => m.RequestViewModel.Name, new { @class = "form-control", @id = "inputName", @placeholder = Model.PhName })
+                @*<input type="text" class="form-control" id="inputName" placeholder="@Model.PhName" />*@
+            </div>
+            <div class="form-group">
+                <label class="sr-only">@Model.PhEmail</label>
+                @Html.TextBoxFor(m => m.RequestViewModel.Email, new { @class = "form-control", @id = "inputEmail", @placeholder = Model.PhEmail })
+                @*<input type="email" class="form-control" id="inputEmail" placeholder="@Model.PhEmail">*@
+            </div>
+            <div class="form-group">
+                <label class="sr-only">@Model.PhPhone</label>
+                @Html.TextBoxFor(m => m.RequestViewModel.Phone, new { @class = "form-control", @id = "inputPhone", @placeholder = Model.PhPhone })
+                @*<input type="text" class="form-control" id="inputPhone" placeholder="@Model.PhPhone" />*@
+            </div>
+            <div class="form-group">
+                @*<select class="form-control">*@
+                @Html.DropDownListFor(m => m.RequestViewModel.PracticeAreaId, Model.PracticeAreas, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="sr-only">@Model.PhDescription</label>
+                @Html.TextAreaFor(m => m.RequestViewModel.Description, new { @class = "form-control", @id = "inputDescription", @placeholder = Model.PhDescription })
+                @*<textarea class="form-control" id="inputDescription" placeholder="@Model.PhDescription"></textarea>*@
+            </div>
+        </div>
+        <div class="col-md-offset-5 col-md-7 form-group button">
+            <input type="submit" class="btn btn-success-own" value="@Model.ButtonText" />
+        </div>
+    }
+</div>

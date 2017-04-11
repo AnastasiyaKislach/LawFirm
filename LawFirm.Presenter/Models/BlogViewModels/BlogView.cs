@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PagedList;
+using LawFirm.Models;
 using System.Linq;
-using System.Web;
 using LawFirm.Presenter.Models.BlogViewModels;
 
 namespace LawFirm.Presenter.Models {
+
 	public class BlogView {
-		public IEnumerable<ArticleViewModel> Articles { get; set; }
+
+		public IPagedList<ArticleInfo> ArticlesPage { get; set; }
+
+		public IEnumerable<LastArticle> LastArticles { get; set; }
 
 		public IEnumerable<CategoryViewModel> Categories { get; set; }
-		
+
+		public IEnumerable<ArchiveViewModel> ArchiveList { get; set; }
+
+		public ArticleViewModel CurrentArticle { get; set; }
 	}
 }

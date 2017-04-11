@@ -40,7 +40,7 @@ namespace LawFirm.Presenter.Controllers {
 				result = false;
 			}
 
-			return PartialView("_TestimonialFormResult", result);
+			return PartialView("_ConsultationResult", result);
 		}
 	}
 }

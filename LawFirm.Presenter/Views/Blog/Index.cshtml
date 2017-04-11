@@ -1,7 +1,11 @@
-﻿@model LawFirm.Presenter.Models.BlogView
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using LawFirm.Models;
+@model LawFirm.Presenter.Models.BlogView
 
 @{
-    ViewBag.Title = "Блог";
+    ViewBag.Title = ViewBag.Category != null ? "Блог. "+ ViewBag.Category : "Блог";
+    ViewBag.Title = ViewBag.Archive != null ? "Блог. "+ ViewBag.Archive : "Блог";
 }
 
 <div class="title-page-wrap">
@@ -13,78 +17,18 @@
     <div class="row blog-preview-page">
         <div class="col-md-7 left-bar">
             <ul>
-                @foreach (var item in Model.Articles) {
+                @foreach (ArticleInfo item in Model.ArticlesPage) {
                     <li>
                         @Html.Partial("_ArticlePreview", item)
                     </li>}
             </ul>
+            @Html.PagedListPager(Model.ArticlesPage, pageNumber => Url.Action("Index", new { pageNumber }))
         </div>
         <div class="col-md-offset-1 col-md-4 right-bar">
-            @using (Html.BeginForm()) {
-                @Html.AntiForgeryToken()
-                <div class="input-group search-group">
-                    <input type="text" class="form-control" placeholder="Найти...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                </div><!-- /input-group -->}
-            <div class="recent-news">
-                <h4>Последние новости</h4>
-                <ul>
-                    @foreach (var item in Model.Articles) {
-                        <li class="clearfix">
-                            @Html.Partial("_ArticlePreviewLess", item)
-                        </li>}
-                </ul>
-            </div>
-            <div class="archive">
-                <h4>Архив новостей</h4>
-                <ul>
-                    @*@foreach (var item in Model.Arhive ???) {
-                        <li class="clearfix">
-                            <div class="">
-                                <a class="">@item</a>
-                            </div>
-                        </li>}*@
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Ноябрь 2016</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Декабрь 2016</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Ноябрь 2016</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Декабрь 2016</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="categories">
-                <h4>Категории</h4>
-                @if (Model.Categories != null) {
-                    <ul>
-                        @foreach (var item in Model.Categories) {
-                            <li class="clearfix">
-                                <div class="">
-                                    <a class="" href="">@item.Title</a>
-                                </div>
-                            </li>}
-                    </ul>
-                    <div class="clearfix"></div>}
-
-            </div>
+            @Html.Partial("_FindForm")
+            @Html.Partial("_LastArticles", Model.LastArticles)
+            @Html.Partial("_ArchiveList", Model.ArchiveList)
+            @Html.Partial("_CategoriesList", Model.Categories)
         </div>
     </div>
 </div>

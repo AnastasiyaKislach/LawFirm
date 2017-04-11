@@ -1,8 +1,7 @@
 ﻿using LawFirm.Presenter.Models.CommentViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
 
 namespace LawFirm.Presenter.Models.BlogViewModels {
 	public class ArticleViewModel {
@@ -18,8 +17,10 @@ namespace LawFirm.Presenter.Models.BlogViewModels {
 
 		public int CategoryId { get; set; }
 
-		public List<LikeViewModel> Likes { get; set; }
+		public LikeViewModel Likes { get; set; }
 
 		public List<CommentViewModel> Comments { get; set; }
+
+		public int TotalComments { get; set; }
 	}
 }

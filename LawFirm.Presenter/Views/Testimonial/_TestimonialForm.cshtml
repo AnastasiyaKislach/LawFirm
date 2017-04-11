@@ -1,7 +1,7 @@
 ﻿@model LawFirm.Presenter.Models.TestimonialViewModels.TestimonialFormViewModel
 
 <div id="testimonial-creation" class="form">
-    @using (Ajax.BeginForm("CreateTestimonial", "Testimonial", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "testimonial-creation", OnSuccess = "", }, new { @class = "", @id = "requestForm", role = "form" })) {
+    @using (Ajax.BeginForm("CreateTestimonial", "Testimonial", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "testimonial-creation", OnSuccess = "", }, new { @class = "", @id = "forma", role = "form" })) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="text-center title-form">

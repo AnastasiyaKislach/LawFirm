@@ -20,6 +20,16 @@ namespace LawFirm.Presenter {
 			bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
 					  "~/Scripts/bootstrap.js",
 					  "~/Scripts/respond.js"));
+			
+			bundles.Add(new ScriptBundle("~/app").Include(
+					  "~/Scripts/Services/commentService.js",
+					   "~/Scripts/Services/formService.js",
+						"~/Scripts/Services/httpService.js",
+						 "~/Scripts/Pages/blog.js",
+						 "~/Scripts/Pages/questions.js"));
+
+			//bundles.Add(new ScriptBundle("~/Scripts/Pages").Include(
+			//		  "~/Scripts/Pages/blog.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
 					  "~/Content/bootstrap.css",

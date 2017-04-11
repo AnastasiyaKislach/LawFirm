@@ -1,14 +1,14 @@
-﻿@using LawFirm.Presenter.Models.BlogViewModels
+﻿@using LawFirm.Presenter.Models.CommentViewModels
 
-@model ArticleViewModel
+@model LawFirm.Presenter.Models.BlogView
 
 @{
-    ViewBag.Title = "Локальный репозиторий";
+    ViewBag.Title = Model.CurrentArticle.Title;
 }
 
 <div class="title-page-wrap">
     <div class="container">
-        <h2 class="page-title">@Model.Title</h2>
+        <h2 class="page-title">@Model.CurrentArticle.Title</h2>
     </div>
 </div>
 <div class="container body-content">
@@ -16,109 +16,16 @@
         <div class="col-md-7 left-bar">
             <div>
                 <div class="item-container">
-                    @Html.Partial("_Article", Model)
-                    @Html.Partial("_CommentForm", new CommentFormViewModel())
+                    @Html.Partial("_Article", Model.CurrentArticle)
+                    @Html.Partial("../Comment/_CommentForm", new CommentFormViewModel { ArticleId = Model.CurrentArticle.Id })
                 </div>
             </div>
         </div>
         <div class="col-md-offset-1 col-md-4 right-bar">
-            @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-            <div class="input-group search-group">
-                <input type="text" class="form-control" placeholder="Найти...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </span>
-            </div><!-- /input-group -->
-            }
-            <div class="recent-news">
-                <h4>Последние новости</h4>
-                <ul>
-                   
-                    <li class="clearfix">
-                        <div class="item-preview-container">
-                            <div class="img-preview">
-                                <img src="~/Images/Blog/Blog-photos.jpg" class="img-responsive" />
-                            </div>
-                            <div class="shortest-text">
-                                <a class="news-title">локальный репозиторий</a>
-                                <p>
-                                    локальный репозиторий лок альный репози
-                                    <a> → </a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="item-preview-container">
-                            <div class="img-preview">
-                                <img src="~/Images/Blog/Blog-photos.jpg" class="img-responsive" />
-                            </div>
-                            <div class="shortest-text">
-                                <a class="news-title">локальный репозиторий</a>
-                                <p>
-                                    локальный репозиторий лок альный репози
-                                    <a> → </a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="archive">
-                <h4>Архив новостей</h4>
-                <ul>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Ноябрь 2016</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Декабрь 2016</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Ноябрь 2016</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Декабрь 2016</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="categories">
-                <h4>Категории</h4>
-                <ul>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Семейное право</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Образование</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Семейное право</a>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="">
-                            <a class="">Недвижимость</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
+            @Html.Partial("_FindForm")
+            @Html.Partial("_LastArticles", Model.LastArticles)
+            @Html.Partial("_ArchiveList", Model.ArchiveList)
+            @Html.Partial("_CategoriesList", Model.Categories)
         </div>
     </div>
 </div>

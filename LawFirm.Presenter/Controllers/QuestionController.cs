@@ -14,17 +14,7 @@ namespace LawFirm.Presenter.Controllers {
 
 		public QuestionController() {
 			Service = new QuestionService(AppConfig.ConnectionString);
-
-			//for (int i = 0; i < 6; i++) {
-			//	Question question = new Question() {
-			//		QuestionText = String.Format("Вопрос {0}", i),
-			//		Answer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit," +
-			//				 "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad" +
-			//				 "minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-			//	};
-			//	Service.Add(question);
-			//	}
-			}
+		}
 
 		// GET: Question
 		public ActionResult Index() {
@@ -42,8 +32,79 @@ namespace LawFirm.Presenter.Controllers {
 			return View(vm);
 		}
 
+		public ActionResult Modify() {
+			List<QuestionViewModel> vm = Service.GetAll().Select(ToVewModel).ToList();
+
+			return View("Questions", vm);
+		}
+
+		[HttpGet]
+		public ActionResult Create() {
+			return View("_QuestionFormCreate");
+		}
+
+		[HttpPost]
+		public ActionResult Create(QuestionViewModel viewModel) {
+			if (!ModelState.IsValid) {
+				return View("_QuestionFormCreate", viewModel);
+			}
+
+			Question question = ToModel(viewModel);
+			Service.Add(question);
+
+			List<QuestionViewModel> vm = Service.GetAll().Select(ToVewModel).ToList();
+			return View("Questions", vm);
+		}
+
+		[HttpGet]
+		public ActionResult Edit(int id) {
+			QuestionViewModel vm = ToVewModel(Service.GetById(id));
+			return View("_QuestionFormUpdate", vm);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(QuestionViewModel viewModel) {
+			if (!ModelState.IsValid) {
+				return View("_QuestionFormUpdate", viewModel);
+			}
+
+			Question question = ToModel(viewModel);
+			Service.Update(question);
+
+			List<QuestionViewModel> vm = Service.GetAll().Select(ToVewModel).ToList();
+
+			return View("Questions", vm);
+
+		}
+		
+		[Authorize]
+		public ActionResult Update(QuestionViewModel viewModel) {
+			if (!ModelState.IsValid) {
+				return PartialView("_QuestionFormUpdate", viewModel);
+			}
+			Question question = ToModel(viewModel);
+
+			QuestionViewModel newQuestion = ToVewModel(Service.Add(question));
+
+			return PartialView("_QuestionFormUpdate", newQuestion);
+		}
+
+		[Authorize]
+		public void Delete(int id) {
+			Question question = Service.Delete(id);
+			
+		}
+
 		protected QuestionViewModel ToVewModel(Question model) {
 			return new QuestionViewModel {
+				Id = model.Id,
+				QuestionText = model.QuestionText,
+				Answer = model.Answer
+			};
+		}
+
+		protected Question ToModel(QuestionViewModel model) {
+			return new Question {
 				Id = model.Id,
 				QuestionText = model.QuestionText,
 				Answer = model.Answer

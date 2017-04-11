@@ -41,6 +41,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -159,6 +167,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Attributes\AuthorizeRedirect.cs" />
     <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -166,6 +175,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PracticeController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
@@ -175,13 +185,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CommentHelper.cs" />
     <Compile Include="Models\AboutViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BlogViewModels\ArchiveViewModel.cs" />
+    <Compile Include="Models\BlogViewModels\ArticlePreviewModel.cs" />
     <Compile Include="Models\BlogViewModels\BlogView.cs" />
     <Compile Include="Models\BlogViewModels\ArticleViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
-    <Compile Include="Models\BlogViewModels\CommentViewModel.cs" />
-    <Compile Include="Models\BlogViewModels\CommentFormViewModel.cs" />
+    <Compile Include="Models\CommentViewModels\CommentViewModel.cs" />
+    <Compile Include="Models\CommentViewModels\CommentFormViewModel.cs" />
     <Compile Include="Models\ContactsViewModel.cs" />
     <Compile Include="Models\FeedBackViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -193,7 +206,7 @@
     <Compile Include="Models\ConsultationPreviewViewModel.cs" />
     <Compile Include="Models\ConsultationViewModel.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
-    <Compile Include="Models\SliderViewModel.cs" />
+    <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\TestimonialViewModels\TestimonialFormViewModel.cs" />
     <Compile Include="Models\TestimonialViewModels\TestimonialView.cs" />
     <Compile Include="Models\TestimonialViewModels\TestimonialViewModel.cs" />
@@ -205,7 +218,17 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\home.css">
+      <DependentUpon>home.less</DependentUpon>
+    </Content>
+    <Content Include="Content\home.min.css">
+      <DependentUpon>home.css</DependentUpon>
+    </Content>
     <Content Include="Content\main.css" />
+    <Content Include="Content\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -221,6 +244,10 @@
     <Content Include="Content\main.less" />
     <Content Include="Content\home.less" />
     <Content Include="Content\StyleSheet1.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\About\_DSC0206.jpg" />
     <Content Include="Images\Blog\Blog-photos.jpg" />
@@ -251,8 +278,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Pages\blog.js" />
+    <Content Include="Scripts\Pages\questions.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Services\commentService.js" />
+    <Content Include="Scripts\Services\formService.js" />
+    <Content Include="Scripts\Services\httpService.js" />
     <Content Include="webpack.config.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -308,12 +340,11 @@
     <Content Include="Views\Practice\Details.cshtml" />
     <Content Include="Views\Shared\_ConsultationResult.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
-    <Content Include="Views\Blog\_CommentFormResult.cshtml" />
     <Content Include="Views\Testimonial\_Testimonial.cshtml" />
     <Content Include="Views\Testimonial\_TestimonialList.cshtml" />
     <Content Include="Views\Testimonial\_TestimonialForm.cshtml" />
     <Content Include="Views\Testimonial\_TestimonialFormResult.cshtml" />
-    <Content Include="Views\Blog\_CommentForm.cshtml" />
+    <Content Include="Views\Comment\_CommentForm.cshtml" />
     <Content Include="Views\Blog\_Article.cshtml" />
     <Content Include="Views\Shared\_Contacts.cshtml" />
     <Content Include="Views\Shared\_About.cshtml" />
@@ -321,11 +352,25 @@
     <Content Include="Views\Home\ContactForm.cshtml" />
     <Content Include="Views\Blog\_ArticlePreview.cshtml" />
     <Content Include="Views\Blog\_ArticlePreviewLess.cshtml" />
+    <Content Include="Views\Like\_LikingResult.cshtml" />
+    <Content Include="Views\Like\_Like.cshtml" />
+    <Content Include="Views\Question\_Question.cshtml" />
+    <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Comment\_Comment.cshtml" />
+    <Content Include="Views\Like\_LikeComment.cshtml" />
+    <Content Include="Views\Like\_LikingResultComment.cshtml" />
+    <Content Include="Views\Comment\_ReplyForm.cshtml" />
+    <Content Include="Views\Question\_QuestionFormUpdate.cshtml" />
+    <Content Include="Views\Question\Questions.cshtml" />
+    <Content Include="Views\Question\_QuestionFormCreate.cshtml" />
+    <Content Include="Views\Blog\_FindForm.cshtml" />
+    <Content Include="Views\Blog\_CategoriesList.cshtml" />
+    <Content Include="Views\Blog\_ArchiveList.cshtml" />
+    <Content Include="Views\Blog\_LastArticles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Comment\" />
     <Folder Include="Views\Settings\" />
   </ItemGroup>
   <ItemGroup>
