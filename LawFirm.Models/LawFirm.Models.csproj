@@ -40,6 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Archive.cs" />
+    <Compile Include="ArticleDetail.cs" />
+    <Compile Include="ArticleInfo.cs" />
+    <Compile Include="CategoryInfo.cs" />
+    <Compile Include="CommentDetails.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Article.cs" />
     <Compile Include="Entities\Category.cs" />
@@ -47,11 +52,13 @@
     <Compile Include="Entities\Consultation.cs" />
     <Compile Include="Entities\Like.cs" />
     <Compile Include="Entities\Practice.cs" />
-    <Compile Include="Entities\Type.cs" />
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Slider.cs" />
     <Compile Include="Entities\Testimonial.cs" />
+    <Compile Include="LastArticle.cs" />
+    <Compile Include="LikeResult.cs" />
+    <Compile Include="Monthes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
