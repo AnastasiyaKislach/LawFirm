@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using LawFirm.Models;
@@ -25,6 +26,29 @@ namespace LawFirm.BusinessLogic {
 			}
 
 			return appSettings;
+		}
+
+		public void SetSetting(AppSettings settings) {
+
+			var properties = typeof(AppSettings).GetProperties();
+
+			foreach (var p in properties) {
+
+				var set = DataContext.Settings.GetAll().FirstOrDefault(i => i.Key == p.Name);
+
+				if (set == null) {
+					DataContext.Settings.Create(new Setting() {
+						Key = p.Name,
+						Value = (p.GetValue(settings) ?? String.Empty).ToString()
+					});
+					DataContext.Save();
+				}
+				else {
+					set.Value = (p.GetValue(settings) ?? String.Empty).ToString();
+					DataContext.Settings.Update(set);
+					DataContext.Save();
+				}
+			}
 		}
 	}
 }

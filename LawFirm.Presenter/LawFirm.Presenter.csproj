@@ -367,6 +367,7 @@
     <Content Include="Views\Blog\_CategoriesList.cshtml" />
     <Content Include="Views\Blog\_ArchiveList.cshtml" />
     <Content Include="Views\Blog\_LastArticles.cshtml" />
+    <Content Include="Views\Home\ContactsEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

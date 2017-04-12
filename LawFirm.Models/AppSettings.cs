@@ -18,7 +18,7 @@
 
 		public string WorkingHours3 { get; set; }
 
-		public string About { get; set; }
+		//public string About { get; set; }
 
 		//public string FullName { get; set; }
 
