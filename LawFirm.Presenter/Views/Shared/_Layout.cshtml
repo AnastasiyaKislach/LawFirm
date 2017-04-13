@@ -44,7 +44,7 @@
         @*<hr />*@
     </div>
     <div class="footer">
-        <div class="container row">
+        <div class="container">
             <div class="col-md-3 footer-block">
                 <div class="shortblock">
                     <h4>Разделы</h4>
@@ -75,7 +75,7 @@
 
                                     if (ViewBag.AppSettings.PhoneNumber3 != null) {
                                         <span> @ViewBag.AppSettings.PhoneNumber3 </span>}
-                                }
+}
                             </div>
                         </li>
                         <li>
@@ -104,15 +104,15 @@
                             </div>
                             <div class="footerlist-text">
                                 @if (ViewBag.AppSettings != null) {
-                                    if (ViewBag.AppSettings.WorkingHours1 != null) {
+                                    if (ViewBag.AppSettings.WorkingHours1 != "") {
                                         <span> @ViewBag.AppSettings.WorkingHours1 </span><br />}
 
-                                    if (ViewBag.AppSettings.WorkingHours2 != null) {
+                                    if (ViewBag.AppSettings.WorkingHours2 != "") {
                                         <span> @ViewBag.AppSettings.WorkingHours2 </span><br />}
 
-                                    if (ViewBag.AppSettings.WorkingHours3 != null) {
+                                    if (ViewBag.AppSettings.WorkingHours3 != "") {
                                         <span> @ViewBag.AppSettings.WorkingHours3 </span><br />}
-                                }
+}
                             </div>
                         </li>
                     </ul>
@@ -122,8 +122,8 @@
                 <div class="shortblock">
                     <h4>Обо мне</h4>
                     <div class="">
-                        @*@if (ViewBag.AppSettings != null) {
-                            <p>@ViewBag.AppSettings.About</p>}*@
+                        @if (ViewBag.AppSettings != null) {
+                            <p>@ViewBag.AppSettings.About</p>}
                     </div>
                 </div>
             </div>

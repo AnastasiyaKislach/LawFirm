@@ -1,6 +1,6 @@
 ﻿@model bool
 
-<div class="text-center result">
+<div class=" result text-center">
     @if (Model)
     {
         <h1>Отзыв успешно принят!</h1>
@@ -8,7 +8,7 @@
     else {
         <h1>Произошла ошибка!</h1>
         <div class="text-center">
-            @Ajax.ActionLink("Попробовать еще раз", "TestimonialForm", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "testimonial-creation" })
+            @Ajax.ActionLink("Попробовать еще раз", "TestimonialForm", "Testimonial",new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "testimonial" })
         </div>
     }
 </div>

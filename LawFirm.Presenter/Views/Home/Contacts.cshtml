@@ -13,12 +13,17 @@
 </div>
 <div class="container body-content">
     <div class="row inquiries-container">
-    @Html.Partial("_FeedBack", new FeedBackViewModel())
+        @Html.Partial("_FeedBack", new FeedBackViewModel())
 
 
         <div class="col-md-offset-1 col-md-5 contact-info-block">
             <div class="contacts-title">
                 <h4>Контактная информация</h4>
+                @if (User.IsInRole("Admin")) {
+                    <a href="@Url.Action("ContactsEdit", "Contacts")">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        Редактировать
+                    </a>}
             </div>
             <ul class="contacts-list">
                 <li>
@@ -30,10 +35,10 @@
                             <span> @ViewBag.AppSettings.PhoneNumber1 </span><br />}
 
                         @if (ViewBag.AppSettings.PhoneNumber2 != null) {
-                            <span> @ViewBag.AppSettings.PhoneNumber2 </span><br />}
+                            <span> | @ViewBag.AppSettings.PhoneNumber2 </span><br />}
 
                         @if (ViewBag.AppSettings.PhoneNumber3 != null) {
-                            <span> @ViewBag.AppSettings.PhoneNumber3 </span>}
+                            <span> | @ViewBag.AppSettings.PhoneNumber3 </span>}
                     </div>
                 </li>
                 <li>
@@ -71,7 +76,7 @@
                 </li>
             </ul>
         </div>
-      @*@Html.Partial("ContactForm", Model)*@
+        @*@Html.Partial("ContactForm", Model)*@
     </div>
     <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2393.889898885571!2d26.010473115830358!3d53.13012197993428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46d8cfdbfcc459ad%3A0xc6c0eb928ff64542!2z0JrQvtC80YHQvtC80L7Qu9GM0YHQutCw0Y8g0YPQuy4gMTEsINCR0LDRgNCw0L3QvtCy0LjRh9C4!5e0!3m2!1sru!2sby!4v1476105668924"></iframe>

@@ -5,7 +5,7 @@
 @light-green-menu-text: #ade0c3;
 @grey-footer-titles: #c7c7c7;
 @shortblock-text: #606060;
-@shortblock-link-color: #616161;
+@shortblock-link-color: #999;
 @line-cut: #EDEDED;
 
 
@@ -78,7 +78,7 @@ body {
 
 // футер
 .footer {
-    background-color: black;
+    background-color: #282828;
     color: white;
     padding: 20px;
 
@@ -112,7 +112,7 @@ body {
         }
 
         li {
-            border-bottom: 1px solid #323232;
+            border-bottom: 1px solid #525252;
             padding-bottom: 10px;
             margin-bottom: 10px;
             color: @shortblock-link-color;
@@ -348,7 +348,7 @@ body {
         color: #fff;
     }
 
-    .pagination > li > a{
+    .pagination > li > a {
         color: #259c58;
     }
 }
@@ -482,6 +482,7 @@ body {
 
 .result {
     padding: 20px 0 20px;
+    margin-top: 50px;
 }
 
 //обо мне
@@ -646,6 +647,23 @@ body {
 
 .contacts-title {
     margin-bottom: 40px;
+    display: table;
+
+    h4 {
+        display: table-cell;
+        padding-right: 40px;
+    }
+
+    a {
+        display: table-cell;
+        padding: 5px;
+        border: 1px dashed black;
+        border-radius: 10px;
+
+        i {
+            padding-right: 5px;
+        }
+    }
 }
 
 .p {
@@ -696,6 +714,11 @@ iframe {
 
 .map-container {
     margin-bottom: 30px;
+}
+
+
+.form-contacts {
+    padding: 30px 0;
 }
 
 @media(max-width: 990px) {
@@ -1014,7 +1037,7 @@ iframe {
     margin-bottom: 10px;
 }
 
-#testimonial-creation {
+.testimonial-creation {
     margin-top: 50px;
 }
 

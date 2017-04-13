@@ -19,12 +19,15 @@ namespace LawFirm.Presenter.Controllers {
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public ActionResult ContactsEdit() {
 			AppSettings appSettings = SettingsService.GetSettings();
 			ContactsViewModel viewModel = ToViewModel(appSettings);
 			return View("../Home/ContactsEdit", viewModel);
 		}
 
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		public ActionResult ContactsEdit(ContactsViewModel viewModel) {
 			if (!ModelState.IsValid) {
 				return View("../Home/ContactsEdit", viewModel);
@@ -32,11 +35,12 @@ namespace LawFirm.Presenter.Controllers {
 			AppSettings settings = ToModel(viewModel);
 
 			SettingsService.SetSetting(settings);
-			return View("../Home/ContactsEdit", viewModel);
+
+			return RedirectToAction("Contacts", "Home");
 		}
 
 		public ActionResult FeedBack(FeedBackViewModel model) {
-			if (ModelState.IsValid) {
+			if (!ModelState.IsValid) {
 
 			}
 			return PartialView("../Home/_FeedBack");
