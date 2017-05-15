@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using LawFirm.DataAccess.Contracts;
 using LawFirm.Models.Entities;
 
@@ -71,6 +72,13 @@ namespace LawFirm.DataAccess {
 		public IRepository<Category> Categories {
 			get { return _categories ?? (_categories = new Repository<Category>(DataContext)); }
 		}
+
+		public virtual IRepository<T> GetRepository<T>() {
+			var property = GetType().GetProperties().FirstOrDefault(i => i.PropertyType == typeof(IRepository<T>));
+
+			return (IRepository<T>)property.GetValue(this);
+		}
+
 		public void Save() {
 			DataContext.SaveChanges();
 		}

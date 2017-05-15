@@ -26,6 +26,8 @@ namespace LawFirm.DataAccess.Contracts {
 
 		IRepository<Category> Categories { get; }
 
+		IRepository<T> GetRepository<T>();
+
 		void Save();
 	}
 }
