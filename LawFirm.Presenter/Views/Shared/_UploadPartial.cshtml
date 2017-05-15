@@ -1,0 +1,35 @@
+﻿
+
+@model IEnumerable<LawFirm.Presenter.Models.ImageViewModel>
+
+
+@{
+    Layout = null;
+}
+
+@foreach (var image in Model) {
+    <a href="#" class="returnImage" data-url="@Request.Url.GetLeftPart(UriPartial.Authority)@image.Url">
+        <img src="@image.Url" alt="Hejsan" id="#image" data-source="@image.Url" width="200" height="200" />
+    </a>
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.returnImage').click('click',
+            function (e) {
+                var urlImage = $(this).attr('data-url');
+                var doc = window.opener.document;
+                var labels = doc.getElementsByTagName('label');
+                for (var i = 0; i < labels.length; i++) {
+                    if (labels[i].textContent === "Ссылка") {
+                        var id = labels[i].id;
+                        var control = doc.getElementById(id).control;
+                        control.value = urlImage;
+                    }
+                }
+                window.close();
+            });
+    });
+</script>

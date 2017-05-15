@@ -4,7 +4,7 @@
 
 <div class="item-container">
     <div class="img-preview">
-        <img src="/@Model.ImagePath" class="img-responsive" />
+        <img src="@Model.ImagePath" class="img-responsive" />
     </div>
     <div class="details">
         <div class="data">
@@ -12,7 +12,7 @@
         </div>
         <div class="like">
             <a>
-                <i class="glyphicon glyphicon-heart-empty"></i>
+                <i class="glyphicon glyphicon-thumbs-up"></i>
                 <span>@Model.Likes</span>
             </a>
         </div>
@@ -28,9 +28,9 @@
         <a href="@Url.Action("Details", "Blog", new {id = Model.Id})">@Model.Title</a>
     </div>
     <div class="short-text">
-        <p>
-            @Model.Text
+        <div>
+            @Html.Raw(Model.Text)
             <a href="@Url.Action("Details", "Blog", new {id = Model.Id})"> → </a>
-        </p>
+        </div>
     </div>
 </div>

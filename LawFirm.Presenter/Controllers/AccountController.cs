@@ -71,21 +71,41 @@ namespace LawFirm.Presenter.Controllers {
 				return View(model);
 			}
 
+
+			if (ModelState.IsValid) {
+				var user = await UserManager.FindAsync(model.Email, model.Password);
+				if (user != null) {
+					if (user.EmailConfirmed ) {
+						await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+						return RedirectToLocal(returnUrl);
+					}
+					else {
+						ModelState.AddModelError("", "Не подтвержден email.");
+					}
+				}
+				else {
+					ModelState.AddModelError("", "Неудачная попытка входа.");
+				}
+			}
+			return View(model);
+
+
+
 			// Сбои при входе не приводят к блокированию учетной записи
 			// Чтобы ошибки при вводе пароля инициировали блокирование учетной записи, замените на shouldLockout: true
-			var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-			switch (result) {
-				case SignInStatus.Success:
-					return RedirectToLocal(returnUrl);
-				case SignInStatus.LockedOut:
-					return View("Lockout");
-				case SignInStatus.RequiresVerification:
-					return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-				case SignInStatus.Failure:
-				default:
-					ModelState.AddModelError("", "Неудачная попытка входа.");
-					return View(model);
-			}
+			//var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+			//switch (result) {
+			//	case SignInStatus.Success:
+			//		return RedirectToLocal(returnUrl);
+			//	case SignInStatus.LockedOut:
+			//		return View("Lockout");
+			//	case SignInStatus.RequiresVerification:
+			//		return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+			//	case SignInStatus.Failure:
+			//	default:
+			//		ModelState.AddModelError("", "Неудачная попытка входа.");
+			//		return View(model);
+			//}
 		}
 
 		//
@@ -148,19 +168,20 @@ namespace LawFirm.Presenter.Controllers {
 					UserName = model.Email,
 					Email = model.Email,
 					LastName = model.LastName,
-					FirstName = model.FirstName
-				};
+					FirstName = model.FirstName,
+					EmailConfirmed = false
+			};
 				var result = await UserManager.CreateAsync(user, model.Password);
 				if (result.Succeeded) {
 					await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-					// Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
-					// Отправка сообщения электронной почты с этой ссылкой
-					// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-					// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-					// await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+					//Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см.по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
+					//Отправка сообщения электронной почты с этой ссылкой
+					 string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+					var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+					await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
 
-					return RedirectToAction("Index", "Home");
+					return View("DisplayEmail");
 				}
 				AddErrors(result);
 			}
@@ -202,10 +223,10 @@ namespace LawFirm.Presenter.Controllers {
 
 				// Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
 				// Отправка сообщения электронной почты с этой ссылкой
-				// string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-				// var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-				// await UserManager.SendEmailAsync(user.Id, "Сброс пароля", "Сбросьте ваш пароль, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
-				// return RedirectToAction("ForgotPasswordConfirmation", "Account");
+				string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+				var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+				await UserManager.SendEmailAsync(user.Id, "Сброс пароля", "Сбросьте ваш пароль, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+				return RedirectToAction("ForgotPasswordConfirmation", "Account");
 			}
 
 			// Появление этого сообщения означает наличие ошибки; повторное отображение формы

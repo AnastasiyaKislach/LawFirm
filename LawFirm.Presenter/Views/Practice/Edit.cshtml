@@ -1,0 +1,58 @@
+﻿@model LawFirm.Presenter.Models.PracticeViewModels.PracticeViewModel
+
+@{
+    ViewBag.Title = "Редактирование";
+}
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div id="form-modify" class="form-modify">
+    <div class="container">
+        @using (Html.BeginForm("Edit", "Practice", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.ImagePath)
+
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @id = "practiceText", @name = "practiceText" })
+                </div>
+                <div class="form-group">
+                    <div class="uploads">
+                        <img name="resourse1" class="resourse1 img-responsive" title="" src="@Model.ImagePath" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn file_upload">
+                        <input type="file" name="upload" onchange="lawfirm.loadService.readURL(this)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-default btn-lg" />
+                </div>
+            </div>}
+        <div class="return-link text-center">
+            @Html.ActionLink("<< Назад к списку", "Index", "Practice")
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    CKEDITOR.replace('practiceText', {
+        filebrowserImageBrowseUrl: '/file/UploadPartial',
+        filebrowserImageUploadUrl: '/file/Uploadnow'
+    });
+    function updateValue(id, value) {
+        document.getElementById(id).value = value;
+    }
+</script>

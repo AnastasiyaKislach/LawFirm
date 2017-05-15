@@ -9,7 +9,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/app")
-   
+    @Scripts.Render("~/ckeditor/ckeditor.js")
 </head>
 <body>
 
@@ -34,126 +34,132 @@
                     <li>@Html.ActionLink("Отзывы", "Index", "Testimonial")</li>
                     <li>@Html.ActionLink("ЧаВо", "Index", "Question")</li>
                     <li>@Html.ActionLink("Контакты", "Contacts", "Home")</li>
+                    @if (User.IsInRole("Admin")) {
+                        <li>@Html.ActionLink("Админ", "Administrate", "Home")</li>}
+
                     @Html.Partial("_LoginPartial")
                 </ul>
             </div>
         </div>
     </div>
-    <div class="">
+    <div class="render-body">
         @RenderBody()
         @*<hr />*@
     </div>
     <div class="footer">
         <div class="container">
-            <div class="col-md-3 footer-block">
-                <div class="shortblock">
-                    <h4>Разделы</h4>
-                    <ul class="menu">
-                        <li>@Html.ActionLink("Обо мне", "About", "Home")</li>
-                        <li>@Html.ActionLink("Дела", "Index", "Practice")</li>
-                        <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
-                        <li>@Html.ActionLink("Отзывы", "Index", "Testimonial")</li>
-                        <li>@Html.ActionLink("ЧаВо", "Index", "Question")</li>
-                    </ul>
+            <div class="">
+                <div class="col-md-3 footer-block">
+                    <div class="shortblock">
+                        <h4>Разделы</h4>
+                        <ul class="menu">
+                            <li>@Html.ActionLink("Обо мне", "About", "Home")</li>
+                            <li>@Html.ActionLink("Дела", "Index", "Practice")</li>
+                            <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
+                            <li>@Html.ActionLink("Отзывы", "Index", "Testimonial")</li>
+                            <li>@Html.ActionLink("ЧаВо", "Index", "Question")</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 footer-block">
-                <div class="shortblock">
-                    <h4>Контакты</h4>
-                    <ul class="footer-contacts-list">
-                        <li>
-                            <div class="footerlist-glyphicon">
-                                <i class="glyphicon glyphicon-earphone"></i>
-                            </div>
-                            <div class="footerlist-text">
-                                @if (ViewBag.AppSettings != null) {
-                                    if (ViewBag.AppSettings.PhoneNumber1 != null) {
-                                        <span> @ViewBag.AppSettings.PhoneNumber1 </span><br />}
+                <div class="col-md-3 footer-block">
+                    <div class="shortblock">
+                        <h4>Контакты</h4>
+                        <ul class="footer-contacts-list">
+                            <li>
+                                <div class="footerlist-glyphicon">
+                                    <i class="glyphicon glyphicon-earphone"></i>
+                                </div>
+                                <div class="footerlist-text">
+                                    @if (ViewBag.AppSettings != null) {
+                                        if (ViewBag.AppSettings.PhoneNumber1 != null) {
+                                    <span> @ViewBag.AppSettings.PhoneNumber1 </span><br />}
 
-                                    if (ViewBag.AppSettings.PhoneNumber2 != null) {
-                                        <span> @ViewBag.AppSettings.PhoneNumber2 </span><br />}
+                                        if (ViewBag.AppSettings.PhoneNumber2 != null) {
+                                    <span> @ViewBag.AppSettings.PhoneNumber2 </span><br />}
 
-                                    if (ViewBag.AppSettings.PhoneNumber3 != null) {
-                                        <span> @ViewBag.AppSettings.PhoneNumber3 </span>}
-}
-                            </div>
-                        </li>
-                        <li>
-                            <div class="footerlist-glyphicon">
-                                <i class="glyphicon glyphicon-map-marker"></i>
-                            </div>
-                            <div class="footerlist-text">
-                                @if (ViewBag.AppSettings != null) {
+                                        if (ViewBag.AppSettings.PhoneNumber3 != null) {
+                                    <span> @ViewBag.AppSettings.PhoneNumber3 </span>}
+                                    }
+                                </div>
+                            </li>
+                            <li>
+                                <div class="footerlist-glyphicon">
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                </div>
+                                <div class="footerlist-text">
+                                    @if (ViewBag.AppSettings != null) {
                                     <span> @ViewBag.AppSettings.City</span>
                                     <br />
                                     <span> @ViewBag.AppSettings.Address</span>}
-                            </div>
-                        </li>
-                        <li>
-                            <div class="footerlist-glyphicon">
-                                <i class="glyphicon glyphicon-envelope"></i>
-                            </div>
-                            <div class="footerlist-text">
-                                @if (ViewBag.AppSettings != null) {
+                                </div>
+                            </li>
+                            <li>
+                                <div class="footerlist-glyphicon">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                </div>
+                                <div class="footerlist-text">
+                                    @if (ViewBag.AppSettings != null) {
                                     <span> @ViewBag.AppSettings.Email</span>}
-                            </div>
-                        </li>
-                        <li>
-                            <div class="footerlist-glyphicon">
-                                <i class="glyphicon glyphicon glyphicon-time"></i>
-                            </div>
-                            <div class="footerlist-text">
-                                @if (ViewBag.AppSettings != null) {
-                                    if (ViewBag.AppSettings.WorkingHours1 != "") {
-                                        <span> @ViewBag.AppSettings.WorkingHours1 </span><br />}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="footerlist-glyphicon">
+                                    <i class="glyphicon glyphicon glyphicon-time"></i>
+                                </div>
+                                <div class="footerlist-text">
+                                    @if (ViewBag.AppSettings != null) {
+                                        if (ViewBag.AppSettings.WorkingHours1 != "") {
+                                    <span> @ViewBag.AppSettings.WorkingHours1 </span><br />}
 
-                                    if (ViewBag.AppSettings.WorkingHours2 != "") {
-                                        <span> @ViewBag.AppSettings.WorkingHours2 </span><br />}
+                                        if (ViewBag.AppSettings.WorkingHours2 != "") {
+                                    <span> @ViewBag.AppSettings.WorkingHours2 </span><br />}
 
-                                    if (ViewBag.AppSettings.WorkingHours3 != "") {
-                                        <span> @ViewBag.AppSettings.WorkingHours3 </span><br />}
-}
-                            </div>
-                        </li>
-                    </ul>
+                                        if (ViewBag.AppSettings.WorkingHours3 != "") {
+                                    <span> @ViewBag.AppSettings.WorkingHours3 </span><br />}
+                                    }
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3  footer-block">
-                <div class="shortblock">
-                    <h4>Обо мне</h4>
-                    <div class="">
-                        @if (ViewBag.AppSettings != null) {
+                <div class="col-md-3  footer-block">
+                    <div class="shortblock">
+                        <h4>Обо мне</h4>
+                        <div class="">
+                            @if (ViewBag.AppSettings != null) {
                             <p>@ViewBag.AppSettings.About</p>}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-block">
+                    <div class="shortblock">
+                        <h4>Последние новости</h4>
+                        <ul class="recent-news-footer">
+                            <li>
+                                <a href="">Etiam id neque ac tortor malesuada</a>
+                                <br />
+                                <span class="post-date">March 13, 2014</span>
+                            </li>
+                            <li>
+                                <a href="">Etiam id neque ac tortor malesuada</a>
+                                <br />
+                                <span class="post-date">February 13, 2014</span>
+                            </li>
+                            <li>
+                                <a href="">Etiam id neque ac tortor malesuada</a>
+                                <br />
+                                <span class="post-date">January 13, 2014</span>
+                            </li>
+                            <li>
+                                <a href="">Etiam id neque ac tortor malesuada</a>
+                                <br />
+                                <span class="post-date">December 26, 2013</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 footer-block">
-                <div class="shortblock">
-                    <h4>Последние новости</h4>
-                    <ul class="recent-news-footer">
-                        <li>
-                            <a href="">Etiam id neque ac tortor malesuada</a>
-                            <br />
-                            <span class="post-date">March 13, 2014</span>
-                        </li>
-                        <li>
-                            <a href="">Etiam id neque ac tortor malesuada</a>
-                            <br />
-                            <span class="post-date">February 13, 2014</span>
-                        </li>
-                        <li>
-                            <a href="">Etiam id neque ac tortor malesuada</a>
-                            <br />
-                            <span class="post-date">January 13, 2014</span>
-                        </li>
-                        <li>
-                            <a href="">Etiam id neque ac tortor malesuada</a>
-                            <br />
-                            <span class="post-date">December 26, 2013</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
         </div>
         <p class="text-center">&copy; @DateTime.Now.Year – Copyright. All Rights Reserved.</p>
     </div>

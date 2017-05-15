@@ -31,6 +31,10 @@ namespace LawFirm.Presenter.Controllers {
 			return View();
 		}
 
+		public ActionResult Administrate() {
+			return View();
+		}
+
 		IEnumerable<SlideViewModel> getSlides(int count = 3) {
 
 			List<SlideViewModel> slides = new List<SlideViewModel>();
@@ -61,7 +65,7 @@ namespace LawFirm.Presenter.Controllers {
 
 			TestimonialService service = new TestimonialService(AppConfig.ConnectionString);
 
-			testimonials = service.GetAll().Take(count).Select(i => new TestimonialViewModel() {
+			testimonials = service.GetAllApproved().Take(count).Select(i => new TestimonialViewModel() {
 				Author = i.Author,
 				Text = i.Text
 			}).ToList();
@@ -78,12 +82,12 @@ namespace LawFirm.Presenter.Controllers {
 
 			ArticleService service = new ArticleService(AppConfig.ConnectionString);
 
-			var articlesQuery = service.GetAll().Take(count);
+			var articlesQuery = service.GetAll().OrderByDescending(i => i.CreationTime).Take(count);
 
 			articles = articlesQuery.Select(
 				i => new ArticlePreviewModel() {
 					Id = i.Id,
-					ImagePath = AppConfig.ImagesRootPath + "/Blog/" + i.ImagePath,
+					ImagePath = AppConfig.BlogImagesPath + i.ImagePath,
 					Title = i.Title,
 					Text = i.Text != "" ? (i.Text.Length > 50 ? i.Text.Substring(0, 50) : "") : "",
 					CreationTime = i.CreationTime,
@@ -92,7 +96,7 @@ namespace LawFirm.Presenter.Controllers {
 				}).ToList();
 
 			LikeService likeService = new LikeService(AppConfig.ConnectionString);
-			
+
 
 			//for (int i = 0; i < articles.Count; i++) {
 			//	articles[i].Likes = likeService.GetAll(articles[i].Id, (int)LawFirm.Models.Entities.PublicationType.Article).ToList().Count;
@@ -114,7 +118,7 @@ namespace LawFirm.Presenter.Controllers {
 
 			practices = service.GetAll().Take(count).Select(i => new PracticeViewModel() {
 				Id = i.Id,
-				ImagePath = AppConfig.ImagesRootPath + "/PracticeArea/" + i.ImagePath,
+				ImagePath = AppConfig.PracticeImagesPath + i.ImagePath,
 				Title = i.Title,
 				Text = i.Text
 			}).ToList();

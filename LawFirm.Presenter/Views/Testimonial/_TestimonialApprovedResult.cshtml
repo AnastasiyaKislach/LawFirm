@@ -1,0 +1,14 @@
+﻿@using LawFirm.Presenter.Models.TestimonialViewModels
+@model TestimonialViewModel
+
+<a  id="confirm@(Model.Id)" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update='confirm@(Model.Id)' href="@Url.Action("Сonfirmation", "Testimonial", new {id = Model.Id})"
+   data-ajax-success="">
+    <button class="btn btn-danger btn-sm">
+        @if (Model.IsApproved) {
+            <span class="glyphicon glyphicon-thumbs-down"></span>
+        }
+        else {
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+        }
+    </button>
+</a>

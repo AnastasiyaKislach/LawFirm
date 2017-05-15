@@ -12,7 +12,6 @@
     function Questions() {
 
         this.removeQuestionRow = function (selector) {
-
             lawfirm.formService.remove(selector);
         }
     }

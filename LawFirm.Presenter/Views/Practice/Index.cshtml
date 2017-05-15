@@ -10,16 +10,29 @@
 </div>
 <div class="container body-content">
     <div class="practice-areas-block">
+        @if (User.IsInRole("Admin")) {
+            <div class="btn-container">
+                <a class="btn btn-add" href="@Url.Action("Create", "Practice")">Добавить новое дело</a>
+            </div>
+        }
         <div class="row preview-block">
             @foreach (var item in Model.Practices) {
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 square">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 square" id="practice@(item.Id)">
                     <a href="@Url.Action("Details", "Practice", new {id = item.Id})" style='background-image: url(@item.ImagePath)'>
                         <div class="back-shadow">
                             <p>@item.Title</p>
                         </div>
                     </a>
-                </div>
-            }
+                    <div class="modification-container">
+                        <div class="btn-edit">
+                            <a class="editing" href="@Url.Action("Edit", "Practice", new {id = item.Id})">ПРАВИТЬ</a>
+                        </div>
+                        <div class="btn-edit">
+                            <a class="editing" data-ajax="true" data-ajax-method="POST" data-ajax-update='' href="@Url.Action("Delete", "Practice", new {id = item.Id})"
+                               data-ajax-success="lawfirm.pages.practices.removePracticeBlock(practice@(item.Id))">УДАЛИТЬ</a>
+                        </div>
+                    </div>
+                </div>}
         </div>
     </div>
 </div>

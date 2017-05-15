@@ -1,0 +1,83 @@
+﻿@using LawFirm.Presenter.Models.BlogViewModels
+@model List<ArticlePreviewModel>
+@{
+    ViewBag.Title = "Редактирование статьи блога";
+}
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div class="container body-content">
+    <div class="customm-container">
+        <table class="table table-bordered table-hover table-condensed" show-filter="true">
+            <thead>
+                <colgroup>
+                    <col width="5%" />
+                    <col width="30%" />
+                    <col width="20%" />
+                    <col width="20%" />
+                    <col width="25%" />
+                </colgroup>
+                <tr>
+                    <th class="text-center">Номер</th>
+                    <th class="text-center">Название</th>
+                    <th class="text-center">Время создания</th>
+                    <th class="text-center">Популярность</th>
+                    <th class="text-center">Редактирование</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var article in Model) {
+                    <tr id="testimonial@(article.Id)">
+                        <td class="text-center">
+                            <span>@article.Id</span>
+                        </td>
+                        <td class="text-center">
+                            <span>@article.Title</span>
+                        </td>
+                        <td class="text-center">
+                            <span>@article.CreationTime</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="popular-preview">
+                                <a>
+                                    <i class="glyphicon glyphicon-thumbs-up"></i>
+                                    <span>@article.Likes</span>
+                                </a>
+                            </div>
+                            <div class="popular-preview">
+                                <a>
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                    <span>@article.Comments</span>
+
+                                </a>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "Blog", new {id = article.Id})">
+                                <button class="btn btn-default btn-sm" id="pencil"><span class="glyphicon glyphicon-pencil"></span></button>
+                            </a>
+                            @*<a data-ajax="true" data-ajax-method="POST" data-ajax-update='' href="@Url.Action("Сonfirmation", "Testimonial", new {id = testimonial.Id})"
+                                   data-ajax-success="lawfirm.pages.testimonials.confirmation('#confirm@(testimonial.Id)')">
+                                    <button class="btn btn-danger btn-sm" onclick="">
+                                        @if (testimonial.IsApproved) {
+                                            <span id="confirm@(testimonial.Id)" class="glyphicon glyphicon-thumbs-down"></span>}
+                                        else {
+                                            <span id="confirm@(testimonial.Id)" class="glyphicon glyphicon-thumbs-up"></span>}
+                                    </button>
+                                </a>*@
+                            <a data-ajax="true" data-ajax-method="POST" data-ajax-update='' href="@Url.Action("Delete", "Blog", new { id = article.Id})"
+                               data-ajax-success="lawfirm.pages.testimonials.removeTestimonial(testimonial@(article.Id))">
+                                <button class="btn btn-danger btn-sm" id="trash" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </a>
+                        </td>
+                    </tr>}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

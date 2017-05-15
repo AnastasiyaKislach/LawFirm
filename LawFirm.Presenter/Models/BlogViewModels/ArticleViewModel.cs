@@ -1,6 +1,7 @@
 ﻿using LawFirm.Presenter.Models.CommentViewModels;
 using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 
 namespace LawFirm.Presenter.Models.BlogViewModels {
@@ -9,6 +10,7 @@ namespace LawFirm.Presenter.Models.BlogViewModels {
 
 		public string Title { get; set; }
 
+		[AllowHtml]
 		public string Text { get; set; }
 
 		public string ImagePath { get; set; }

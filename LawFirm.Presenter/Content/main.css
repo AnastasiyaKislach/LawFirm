@@ -133,7 +133,7 @@ body a:hover {
   }
 }
 .body-content {
-  min-height: 500px;
+  min-height: 600px;
   margin-top: 20px;
 }
 .slider {
@@ -279,17 +279,20 @@ body a:hover {
   color: #7C7F82;
 }
 .comment {
-  /*width: 15%;
-    float: left;*/
+  float: right;
   position: relative;
   display: inline-block;
-  float: right;
   margin-left: 5px;
 }
 .like {
+  float: right;
   position: relative;
   display: inline-block;
-  float: right;
+  margin-left: 5px;
+}
+.popular-preview {
+  position: relative;
+  display: inline-block;
   margin-left: 5px;
 }
 .liked-link {
@@ -432,6 +435,45 @@ body a:hover {
 }
 .practice-text ol > li {
   list-style-type: decimal;
+}
+/*редактирование*/
+.modification-container {
+  position: absolute;
+  top: 72%;
+  left: 25%;
+  text-align: center;
+}
+.btn-edit {
+  display: inline-block;
+  margin-right: 15px;
+}
+.btn-edit a.editing {
+  text-transform: capitalize;
+  display: inline-block;
+  padding: 6px 16px;
+  font-size: .8725em;
+  font-weight: 300;
+  color: #f9f9f9;
+  border: 1px solid #f9f9f9;
+  border-radius: 4px;
+  background: 0 0;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.btn-edit a.editing:active,
+.btn-edit a.editing:focus,
+.btn-edit a.editing:hover {
+  color: #3f3d3d;
+  background-color: #fff;
+  opacity: .9;
+}
+.btn-container {
+  /*padding-left: 15px;*/
+}
+.btn-add {
+  color: #fff;
+  background-color: #259c58;
+  padding-right: 15px;
 }
 .inquiries-container {
   margin-bottom: 50px;
@@ -796,6 +838,7 @@ iframe {
 }
 .form-modify {
   padding-top: 40px;
+  min-height: 600px;
 }
 .form-modify #question {
   height: 70px;
@@ -806,4 +849,14 @@ iframe {
 .form-modify .btn {
   color: #fff;
   background-color: #259c58;
+}
+.return-link {
+  margin: 20px;
+  font-weight: bold;
+  font-size: 1.5em;
+  /*a {
+        padding: 5px;
+        border: 1px dashed #000;
+        border-radius: 10px;
+    }*/
 }

@@ -41,15 +41,9 @@
                         </td>
                         <td>
                             <span>@question.QuestionText</span>
-                            <div class="controls hidden">
-                                <input type="text" name="question.QuestionText" class="editable-input form-control input-sm" />
-                            </div>
                         </td>
                         <td>
                             <span>@question.Answer</span>
-                            <div class="controls hidden">
-                                <input type="text" name="question.Answer" class="editable-input form-control input-sm" />
-                            </div>
                         </td>
                         <td class="text-center">
                             <a href="@Url.Action("Edit", "Question", new {id = question.Id})">

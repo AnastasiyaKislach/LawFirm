@@ -25,8 +25,11 @@ namespace LawFirm.Presenter {
 					  "~/Scripts/Services/commentService.js",
 					   "~/Scripts/Services/formService.js",
 						"~/Scripts/Services/httpService.js",
+						"~/Scripts/Services/loadService.js",
 						 "~/Scripts/Pages/blog.js",
-						 "~/Scripts/Pages/questions.js"));
+						 "~/Scripts/Pages/questions.js",
+						 "~/Scripts/Pages/practices.js",
+						 "~/Scripts/Pages/testimonials.js"));
 
 			//bundles.Add(new ScriptBundle("~/Scripts/Pages").Include(
 			//		  "~/Scripts/Pages/blog.js"));

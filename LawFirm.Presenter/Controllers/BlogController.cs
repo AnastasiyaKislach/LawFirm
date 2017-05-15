@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using LawFirm.BusinessLogic;
 using LawFirm.Presenter.Config;
@@ -56,7 +57,6 @@ namespace LawFirm.Presenter.Controllers {
 			return View("Index", vm);
 		}
 
-
 		public ActionResult ArchiveArticles(int month, int year, int pageNumber = 1, int pageSize = 5) {
 			BlogView vm = new BlogView {
 				ArticlesPage = ArticleService.GetArchiveArticles(month, year, pageNumber, pageSize),
@@ -65,7 +65,7 @@ namespace LawFirm.Presenter.Controllers {
 				ArchiveList = ArticleService.GetArchive().Select(ToViewModel)
 			};
 
-			ViewBag.Archive = ((Monthes)month-1).ToString() + " " + year;
+			ViewBag.Archive = ((Monthes)month - 1).ToString() + " " + year;
 
 			vm.ArticlesPage.Select(ToViewModel).ToList();
 			return View("Index", vm);
@@ -96,7 +96,98 @@ namespace LawFirm.Presenter.Controllers {
 			return View(vm);
 		}
 
+		[HttpGet]
+		public ActionResult Create() {
+			ArticleEditableViewModel vm = new ArticleEditableViewModel {
+				Categories = CategoryService.GetAll().Select(ToSelectListItem)
+			};
+			return View("Create", vm);
+		}
 
+		[HttpPost]
+		public ActionResult Create(ArticleEditableViewModel viewModel, HttpPostedFileBase upload) {
+			if (!ModelState.IsValid) {
+				return View("Create", viewModel);
+			}
+
+			Article article = new Article {
+				Title = viewModel.RequestViewModel.Title,
+				Text = viewModel.RequestViewModel.Text,
+				CategoryId = viewModel.RequestViewModel.CategoryId,
+				CreationTime = DateTime.Now
+			};
+
+			if (upload != null) {
+				// получаем имя файла
+				string fileName = System.IO.Path.GetFileName(upload.FileName);
+				// сохраняем файл в папку Files в проекте
+				upload.SaveAs(Server.MapPath("/" + AppConfig.BlogImagesPath + fileName));
+				article.ImagePath = upload.FileName;
+			}
+
+			Article newArticle = ArticleService.Add(article);
+
+			return RedirectToAction("Details", new { id = newArticle.Id });
+		}
+
+		[HttpGet]
+		public ActionResult Edit(int id) {
+			ArticleEditableViewModel vm = new ArticleEditableViewModel {
+				RequestViewModel = ToViewModel(ArticleService.GetArticleDetail(id)),
+				Categories = CategoryService.GetAll().Select(ToSelectListItem)
+			};
+			return View("Edit", vm);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(ArticleEditableViewModel viewModel, HttpPostedFileBase upload) {
+			if (!ModelState.IsValid) {
+				return View("Edit", viewModel);
+			}
+
+			Article article = new Article {
+				Id = viewModel.RequestViewModel.Id,
+				Title = viewModel.RequestViewModel.Title,
+				Text = viewModel.RequestViewModel.Text,
+				CategoryId = viewModel.RequestViewModel.CategoryId,
+				CreationTime = viewModel.RequestViewModel.CreationTime,
+				ImagePath = viewModel.RequestViewModel.ImagePath.Replace(AppConfig.BlogImagesPath, "")
+			};
+
+			if (upload != null) {
+				// получаем имя файла
+				string fileName = System.IO.Path.GetFileName(upload.FileName);
+				// сохраняем файл в папку Files в проекте
+				upload.SaveAs(Server.MapPath("/" + AppConfig.BlogImagesPath + fileName));
+				article.ImagePath = upload.FileName;
+			}
+			Article udatedArticle = ArticleService.Edit(article);
+
+			return RedirectToAction("Details", new { id = udatedArticle.Id });
+		}
+
+		public ActionResult Modify() {
+			List<ArticlePreviewModel> vm = new List<ArticlePreviewModel>();
+
+			var articlesQuery = ArticleService.GetAll().OrderByDescending(i => i.CreationTime);
+
+			vm = articlesQuery.Select(
+				i => new ArticlePreviewModel() {
+					Id = i.Id,
+					Title = i.Title,
+					CreationTime = i.CreationTime,
+					Comments = i.Comments.Count,
+					Likes = i.Likes.Count
+				}).ToList();
+
+			return View("Articles", vm);
+		}
+
+		public void Delete(int id)
+		{
+			ArticleService.PartialDelete(id);
+		}
+	
 		protected ArticleInfo ToViewModel(ArticleInfo model) {
 
 			model.ImagePath = AppConfig.BlogImagesPath + model.ImagePath;
@@ -130,6 +221,7 @@ namespace LawFirm.Presenter.Controllers {
 				TotalComments = model.Comments.Count()
 			};
 		}
+
 		public CategoryViewModel ToViewModel(CategoryInfo category) {
 			return new CategoryViewModel {
 				Id = category.Id,
@@ -146,6 +238,14 @@ namespace LawFirm.Presenter.Controllers {
 			};
 		}
 
+		private SelectListItem ToSelectListItem(Category model) {
+			SelectListItem item = new SelectListItem() {
+				Value = model.Id.ToString(),
+				Text = model.Title
+			};
+
+			return item;
+		}
 	}
 }
 

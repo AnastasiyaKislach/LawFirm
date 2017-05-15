@@ -1,0 +1,37 @@
+﻿
+@model LawFirm.Presenter.Models.TestimonialViewModels.TestimonialViewModel
+
+@{
+    ViewBag.Title = "Редактирование отзыва";
+}
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div id="form-modify" class="form-modify">
+    <div class="container">
+        @using (Html.BeginForm("Edit", "Testimonial", FormMethod.Post)) {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Email)
+            @Html.HiddenFor(m => m.CreationTime)
+
+            <div class="col-md-offset-1 col-md-10">
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Author, new { @class = "form-control", @id = "question", @placeholder = "Автор" })
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-10">
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @id = "answer", @placeholder = "Ответ" })
+                </div>
+            </div>
+            <div class="col-md-offset-5 col-md-7 form-group button">
+                <input type="submit" class="btn btn-lg" value="Сохранить" />
+            </div>
+        }
+    </div>
+</div>

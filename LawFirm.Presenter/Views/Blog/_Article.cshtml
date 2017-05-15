@@ -1,13 +1,7 @@
 ﻿@model LawFirm.Presenter.Models.BlogViewModels.ArticleViewModel
 
-
-<div class="img-preview">
-    <img src="/@Model.ImagePath" class="img-responsive" />
-</div>
 <div class="article-text">
-    <p>
-        @Model.Text
-    </p>
+    @Html.Raw(Model.Text)
 </div>
 <div class="details full">
     <div class="date-publicate ">

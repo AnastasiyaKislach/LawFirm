@@ -1,0 +1,130 @@
+﻿
+
+@{
+    ViewBag.Title = "Панель управления администратора";
+}
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" ng-href="">Дела</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li class="active"><a href="@Url.Action("Create", "Practice")"><i class="glyphicon glyphicon-plus"></i> Добавить</a></li>
+                        <li><a href="@Url.Action("Index", "Practice")"><i class="glyphicon glyphicon-edit"></i> Редактировать</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" ng-href="">Блог</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li class="active"><a href="@Url.Action("Create", "Blog")"><i class="glyphicon glyphicon-plus"></i> Добавить</a></li>
+                        <li><a href="@Url.Action("Modify", "Blog")"><i class="glyphicon glyphicon-edit"></i> Редактировать</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" href="">Отзывы</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li><a href="@Url.Action("Modify", "Testimonial")"><i class="glyphicon glyphicon-edit"></i> Редактировать</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" ng-href="">Часто задаваемые вопросы</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li class="active"><a href="@Url.Action("Create", "Question")"><i class="glyphicon glyphicon-plus"></i> Добавить</a></li>
+                        <li><a href="@Url.Action("Modify", "Testimonial")"><i class="glyphicon glyphicon-edit"></i> Редактировать</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" ng-href="">Контакты</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li><a href="@Url.Action("ContactsEdit", "Contacts")"><i class="glyphicon glyphicon-edit"></i> Редактировать</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" ng-href="">Заявки</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li><a href=""><i class="glyphicon glyphicon-eye-open"></i> Просмотреть</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" ng-href="">Обо мне</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li><a href="@Url.Action("AboutEdit", "About")"><i class="glyphicon glyphicon-edit"></i> Редактировать</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" ng-href="">Пользователи</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li class="active"><a href=""><i class="glyphicon glyphicon-edit"></i> Редактировать</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="h4_title" ng-href="">Управление учетной записью</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navmenu-nav">
+                        <li><a href="@Url.Action("Index", "Manage")"><i class="glyphicon glyphicon-edit"></i> Редактировать</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

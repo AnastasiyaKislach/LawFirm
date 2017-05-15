@@ -2,10 +2,8 @@
 using LawFirm.Models.Entities;
 using LawFirm.Presenter.Config;
 using LawFirm.Presenter.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace LawFirm.Presenter.Controllers {
@@ -40,13 +38,13 @@ namespace LawFirm.Presenter.Controllers {
 
 		[HttpGet]
 		public ActionResult Create() {
-			return View("_QuestionFormCreate");
+			return View("Create");
 		}
 
 		[HttpPost]
 		public ActionResult Create(QuestionViewModel viewModel) {
 			if (!ModelState.IsValid) {
-				return View("_QuestionFormCreate", viewModel);
+				return View("Create", viewModel);
 			}
 
 			Question question = ToModel(viewModel);
@@ -59,13 +57,14 @@ namespace LawFirm.Presenter.Controllers {
 		[HttpGet]
 		public ActionResult Edit(int id) {
 			QuestionViewModel vm = ToVewModel(Service.GetById(id));
-			return View("_QuestionFormUpdate", vm);
+			return View("Edit", vm);
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Edit(QuestionViewModel viewModel) {
 			if (!ModelState.IsValid) {
-				return View("_QuestionFormUpdate", viewModel);
+				return View("Edit", viewModel);
 			}
 
 			Question question = ToModel(viewModel);
@@ -78,21 +77,8 @@ namespace LawFirm.Presenter.Controllers {
 		}
 		
 		[Authorize]
-		public ActionResult Update(QuestionViewModel viewModel) {
-			if (!ModelState.IsValid) {
-				return PartialView("_QuestionFormUpdate", viewModel);
-			}
-			Question question = ToModel(viewModel);
-
-			QuestionViewModel newQuestion = ToVewModel(Service.Add(question));
-
-			return PartialView("_QuestionFormUpdate", newQuestion);
-		}
-
-		[Authorize]
 		public void Delete(int id) {
-			Question question = Service.Delete(id);
-			
+			Service.PartialDelete(id);
 		}
 
 		protected QuestionViewModel ToVewModel(Question model) {

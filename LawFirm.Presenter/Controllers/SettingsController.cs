@@ -1,11 +1,6 @@
 ﻿using LawFirm.BusinessLogic;
 using LawFirm.Models;
 using LawFirm.Presenter.Config;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace LawFirm.Presenter.Controllers
 {
@@ -26,15 +21,15 @@ namespace LawFirm.Presenter.Controllers
 			}
 		}
 		// GET: Settings
-		public ActionResult Index()
-        {
-			if (Service != null) {
-				Settings = Service.GetSettings();
-			}
-			if (Settings == null) {
-				Settings = new AppSettings();
-			}
-			return View(Settings);
-        }
+		//public ActionResult Index()
+  //      {
+		//	if (Service != null) {
+		//		Settings = Service.GetSettings();
+		//	}
+		//	if (Settings == null) {
+		//		Settings = new AppSettings();
+		//	}
+		//	return View(Settings);
+  //      }
     }
 }
