@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LawFirm.DataAccess;
 using LawFirm.Models.Entities;
 
 namespace LawFirm.BusinessLogic {
-	public class PracticeService : BaseService {
+	public class PracticeService : BaseService<Practice> {
 		public PracticeService(string connectionString) : base(connectionString) {
 		}
 
-		public IQueryable<Practice> GetAll() {
-			return DataContext.Practices.GetAll().Where(i => !i.IsDeleted);
+		public override IQueryable<Practice> GetAll() {
+			return base.GetAll().Where(i => !i.IsDeleted);
 		}
 
-		public void Add(Practice practice) {
+		public Practice Add(Practice practice) {
 			if (practice == null) {
 				throw new ArgumentNullException(nameof(practice));
 			}
@@ -23,24 +19,35 @@ namespace LawFirm.BusinessLogic {
 			practice.Text = practice.Text.Trim();
 			practice.Title = practice.Title.Trim();
 
-			DataContext.Practices.Create(practice);
-			DataContext.Save();
+			Practice newPractice = Create(practice);
+			Save();
+
+			return newPractice; 
+		}
+		
+		public Practice Edit(Practice practice) {
+			if (practice == null) {
+				throw new ArgumentNullException(nameof(practice));
+			}
+
+			Practice updatePractice = Update(practice);
+			Save();
+
+			return updatePractice;
+
 		}
 
-		public Practice GetById(int id) {
-			Practice practice = DataContext.Practices.GetById(id);
-			return practice;
-		}
-
-		public void Delete(int id) {
+		public Practice PartialDelete(int id) {
 			Practice practice = DataContext.Practices.GetById(id);
 
 			if (practice != null) {
 				practice.IsDeleted = true;
 			}
 
-			DataContext.Practices.Update(practice);
-			DataContext.Save();
+			Practice deletedpractice = Update(practice);
+			Save();
+
+			return deletedpractice;
 		}
 	}
 }

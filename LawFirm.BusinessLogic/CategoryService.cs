@@ -4,12 +4,12 @@ using System.Linq;
 using LawFirm.Models;
 
 namespace LawFirm.BusinessLogic {
-	public class CategoryService : BaseService {
+	public class CategoryService : BaseService<Category> {
 		public CategoryService(string connectionString) : base(connectionString) {
 		}
 
-		public IQueryable<Category> GetAll() {
-			return DataContext.Categories.GetAll().Where(i => !i.IsDeleted);
+		public override IQueryable<Category> GetAll() {
+			return base.GetAll().Where(i => !i.IsDeleted);
 		}
 
 		public IQueryable<CategoryInfo> GetCategoriesInfo() {
@@ -19,12 +19,6 @@ namespace LawFirm.BusinessLogic {
 				Articles = i.Articles.Count(l => !l.IsDeleted)
 			});
 		}
-
-		public Category GetById(int id) {
-			Category category = DataContext.Categories.GetById(id);
-			return category;
-		}
-
 
 	}
 }

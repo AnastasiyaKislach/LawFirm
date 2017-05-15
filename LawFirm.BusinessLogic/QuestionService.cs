@@ -3,17 +3,12 @@ using System;
 using System.Linq;
 
 namespace LawFirm.BusinessLogic {
-	public class QuestionService : BaseService {
+	public class QuestionService : BaseService<Question> {
 		public QuestionService(string connectionString) : base(connectionString) {
 		}
 
-		public IQueryable<Question> GetAll() {
-			return DataContext.Questions.GetAll().Where(i => !i.IsDeleted);
-		}
-
-		public Question GetById(int id) {
-			Question question = DataContext.Questions.GetById(id);
-			return question;
+		public override IQueryable<Question> GetAll() {
+			return base.GetAll().Where(i => !i.IsDeleted);
 		}
 
 		public Question Add(Question question) {
@@ -24,34 +19,33 @@ namespace LawFirm.BusinessLogic {
 			question.QuestionText = question.QuestionText.Trim();
 			question.Answer = question.Answer.Trim();
 
-			Question newQuestion = DataContext.Questions.Create(question);
-			DataContext.Save();
+			Question newQuestion = Create(question);
+			Save();
 
 			return newQuestion;
 		}
 
-		public Question Update(Question question)
-		{
+		public Question Edit(Question question) {
 			if (question == null) {
 				throw new ArgumentNullException(nameof(question));
 			}
 
-			Question updateQuestion = DataContext.Questions.Update(question);
-			DataContext.Save();
+			Question updateQuestion = Update(question);
+			Save();
 
 			return updateQuestion;
 
 		}
 
-		public Question Delete(int id) {
-			Question question = DataContext.Questions.GetById(id);
+		public Question PartialDelete(int id) {
+			Question question = GetById(id);
 
 			if (question != null) {
 				question.IsDeleted = true;
 			}
 
-			Question deletedquestion = DataContext.Questions.Update(question);
-			DataContext.Save();
+			Question deletedquestion = Update(question);
+			Save();
 
 			return deletedquestion;
 		}

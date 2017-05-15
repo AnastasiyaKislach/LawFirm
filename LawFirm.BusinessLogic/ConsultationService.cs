@@ -3,15 +3,15 @@ using System.Linq;
 using LawFirm.Models.Entities;
 
 namespace LawFirm.BusinessLogic {
-	public class ConsultationService : BaseService{
+	public class ConsultationService : BaseService<Consultation> {
 		public ConsultationService(string connectionString) : base(connectionString) {
 		}
 
-		public IQueryable<Consultation> GetAll() {
-			return DataContext.Consultations.GetAll().Where(i => !i.IsDeleted);
+		public override IQueryable<Consultation> GetAll() {
+			return base.GetAll().Where(i => !i.IsDeleted);
 		}
 
-		public void Add(Consultation consultation) {
+		public Consultation Add(Consultation consultation) {
 			if (consultation == null) {
 				throw new ArgumentNullException(nameof(consultation));
 			}
@@ -22,19 +22,23 @@ namespace LawFirm.BusinessLogic {
 			consultation.CreationTime = DateTime.Now;
 			consultation.MessageText = consultation.MessageText.Trim();
 
-			DataContext.Consultations.Create(consultation);
-			DataContext.Save();
+			Consultation newConsultation = Create(consultation);
+			Save();
+
+			return newConsultation;
 		}
 
-		public void Delete(int id) {
-			Consultation consultation = DataContext.Consultations.GetById(id);
+		public override Consultation Delete(int id) {
+			Consultation consultation = GetById(id);
 
 			if (consultation != null) {
 				consultation.IsDeleted = true;
 			}
 
-			DataContext.Consultations.Update(consultation);
-			DataContext.Save();
+			Consultation deletedConsultation = Update(consultation);
+			Save();
+
+			return deletedConsultation;
 		}
 	}
 }

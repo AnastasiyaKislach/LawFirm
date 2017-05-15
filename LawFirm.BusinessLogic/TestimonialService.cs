@@ -4,16 +4,16 @@ using LawFirm.Models.Entities;
 
 namespace LawFirm.BusinessLogic {
 
-	public class TestimonialService : BaseService {
+	public class TestimonialService : BaseService<Testimonial> {
 
 		public TestimonialService(string connectionString) : base(connectionString) {
 		}
 
-		public IQueryable<Testimonial> GetAll() {
-			return DataContext.Testimonials.GetAll().Where(i => !i.IsDeleted && i.IsApprove);
+		public IQueryable<Testimonial> GetAllApproved() {
+			return GetAll().Where(i => !i.IsDeleted && i.IsApproved);
 		}
 
-		public void Add(Testimonial testimonial) {
+		public Testimonial Add(Testimonial testimonial) {
 			if (testimonial == null) {
 				throw new ArgumentNullException(nameof(testimonial));
 			}
@@ -23,19 +23,33 @@ namespace LawFirm.BusinessLogic {
 			testimonial.Email = testimonial.Email.Trim();
 			testimonial.Text = testimonial.Text.Trim();
 
-			DataContext.Testimonials.Create(testimonial);
-			DataContext.Save();
+			Testimonial newTestimonial = Create(testimonial);
+			Save();
+
+			return newTestimonial;
 		}
 
-		public void Delete(int id) {
-			Testimonial testimonial = DataContext.Testimonials.GetById(id);
+		public Testimonial Edit(Testimonial testimonial) {
+			if (testimonial == null) {
+				throw new ArgumentNullException(nameof(testimonial));
+			}
+
+			Testimonial updateTestimonial = Update(testimonial);
+			Save();
+
+			return updateTestimonial;
+
+		}
+
+		public void PartialDelete(int id) {
+			Testimonial testimonial = GetById(id);
 
 			if (testimonial != null) {
 				testimonial.IsDeleted = true;
 			}
 
-			DataContext.Testimonials.Update(testimonial);
-			DataContext.Save();
+			Update(testimonial);
+			Save();
 		}
 	}
 }

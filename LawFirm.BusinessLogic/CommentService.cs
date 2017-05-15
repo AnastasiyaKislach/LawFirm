@@ -4,59 +4,55 @@ using System.Linq;
 using LawFirm.Models.Entities;
 
 namespace LawFirm.BusinessLogic {
-	public class CommentService : BaseService {
+	public class CommentService : BaseService<Comment> {
 		public CommentService(string connectionString) : base(connectionString) {
 		}
 
 		public Comment Add(Comment comment) {
-
 			if (comment == null) {
 				throw new ArgumentNullException(nameof(comment));
 			}
 
 			comment.CreationTime = DateTime.Now;
 
-			if (comment.ParentCommentId.HasValue)
-			{
+			if (comment.ParentCommentId.HasValue) {
+
 				Comment parentComment = GetById(comment.ParentCommentId.Value);
 
-				if (parentComment != null)
-				{
+				if (parentComment != null) {
 					comment.Level = parentComment.Level + 1;
 				}
 			}
 
-			comment = DataContext.Comments.Create(comment);
-			DataContext.Save();
+			comment = Create(comment);
+			Save();
 
 			return comment;
 		}
 
-		public IQueryable<Comment> GetAll() {
-			return DataContext.Comments.GetAll().Where(i => !i.IsDeleted);
+		public override IQueryable<Comment> GetAll() {
+			return base.GetAll().Where(i => !i.IsDeleted);
 		}
 
 		public IQueryable<Comment> GetAllByArticleId(int articleId) {
-			return DataContext.Comments.GetAll().Where(i => !i.IsDeleted && i.ArticleId == articleId);
+			return GetAll().Where(i => i.ArticleId == articleId);
 		}
 
 		public List<Comment> GetReplies(int idComment) {
 			return GetAll().Where(i => i.ParentCommentId == idComment).OrderByDescending(i => i.CreationTime).ToList();
 		}
 
-		public Comment GetById(int id) {
-			Comment comment = DataContext.Comments.GetById(id);
-			return comment;
-		}
-		public void Delete(int id) {
-			Comment comment = DataContext.Comments.GetById(id);
+		public Comment PartialDelete(int id) {
+			Comment comment = GetById(id);
 
 			if (comment != null) {
 				comment.IsDeleted = true;
 			}
 
-			DataContext.Comments.Update(comment);
-			DataContext.Save();
+			Comment deletedComment = Update(comment);
+			Save();
+
+			return deletedComment;
 		}
 
 		public int GetDepth(int articleId) {
@@ -66,6 +62,6 @@ namespace LawFirm.BusinessLogic {
 			}
 			return comments.Max(i => i.Level);
 		}
-		
+
 	}
 }

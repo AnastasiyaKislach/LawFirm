@@ -6,7 +6,7 @@ using LawFirm.Models;
 using LawFirm.Models.Entities;
 
 namespace LawFirm.BusinessLogic {
-	public class SettingsService : BaseService {
+	public class SettingsService : BaseService<Setting> {
 
 		public SettingsService(string connectionString) : base(connectionString) { }
 
@@ -14,7 +14,7 @@ namespace LawFirm.BusinessLogic {
 
 			AppSettings appSettings = new AppSettings();
 			PropertyInfo[] properties = typeof(AppSettings).GetProperties();
-			List<Setting> settings = DataContext.Settings.GetAll().ToList();
+			List<Setting> settings = GetAll().ToList();
 
 			foreach (PropertyInfo property in properties) {
 				if (property.CanWrite) {
@@ -34,19 +34,19 @@ namespace LawFirm.BusinessLogic {
 
 			foreach (var p in properties) {
 
-				var set = DataContext.Settings.GetAll().FirstOrDefault(i => i.Key == p.Name);
+				var set = GetAll().FirstOrDefault(i => i.Key == p.Name);
 
 				if (set == null) {
-					DataContext.Settings.Create(new Setting() {
+					Create(new Setting() {
 						Key = p.Name,
 						Value = (p.GetValue(settings) ?? String.Empty).ToString()
 					});
-					DataContext.Save();
+					Save();
 				}
 				else {
 					set.Value = (p.GetValue(settings) ?? String.Empty).ToString();
-					DataContext.Settings.Update(set);
-					DataContext.Save();
+					Update(set);
+					Save();
 				}
 			}
 		}

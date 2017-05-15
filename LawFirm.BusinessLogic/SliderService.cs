@@ -6,19 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LawFirm.BusinessLogic {
-	public class SlideService : BaseService {
+	public class SlideService : BaseService<Slide> {
 		public SlideService(string connectionString) : base(connectionString) {
 		}
 
-		public IQueryable<Slide> GetAll() {
-			return DataContext.Slides.GetAll().Where(i => !i.IsDeleted);
+		public override IQueryable<Slide> GetAll() {
+			return base.GetAll().Where(i => !i.IsDeleted);
 		}
-
-		public Slide GetById(int id) {
-			Slide slide = DataContext.Slides.GetById(id);
-			return slide;
-		}
-
 
 		public void Add(Slide slide) {
 			if (slide == null) {
@@ -27,19 +21,19 @@ namespace LawFirm.BusinessLogic {
 
 			slide.ImagePath = slide.ImagePath;
 
-			DataContext.Slides.Create(slide);
-			DataContext.Save();
+			Create(slide);
+			Save();
 		}
 
-		public void Delete(int id) {
-			Slide slide = DataContext.Slides.GetById(id);
+		public void PartialDelete(int id) {
+			Slide slide = GetById(id);
 
 			if (slide != null) {
 				slide.IsDeleted = true;
 			}
 
-			DataContext.Slides.Update(slide);
-			DataContext.Save();
+			Update(slide);
+			Save();
 		}
 	}
 }
