@@ -12,6 +12,6 @@ namespace LawFirm.Models.Entities {
 
 		public DateTime CreationTime { get; set; }
 
-		public bool IsApprove { get; set; }
+		public bool IsApproved { get; set; }
 	}
 }
