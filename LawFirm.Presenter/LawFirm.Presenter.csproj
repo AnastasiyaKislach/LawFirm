@@ -207,7 +207,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PracticeViewModels\PracticeView.cs" />
     <Compile Include="Models\PracticeViewModels\PracticeViewModel.cs" />
-    <Compile Include="Models\ConsultationPreviewViewModel.cs" />
+    <Compile Include="Models\ConsultationPreviewModel.cs" />
     <Compile Include="Models\ConsultationViewModel.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\SlideViewModel.cs" />
@@ -788,6 +788,7 @@
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Comment\_CommentFormResult.cshtml" />
+    <Content Include="Views\Consultation\Consultations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

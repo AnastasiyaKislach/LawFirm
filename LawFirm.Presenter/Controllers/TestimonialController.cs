@@ -22,19 +22,20 @@ namespace LawFirm.Presenter.Controllers {
 			return View(vm);
 		}
 
+		[Authorize(Roles = "Admin")]
 		public ActionResult Modify() {
 			List<TestimonialViewModel> vm = Service.GetAll().Select(ToVewModel).ToList();
 
 			return View("Testimonials", vm);
 		}
 
+		[Authorize(Roles = "Admin")]
 		public void Сonfirmation(int id) {
-			Testimonial testimonial = Service.GetById(id);
-			testimonial.IsApproved = !testimonial.IsApproved;
-			Service.Update(testimonial);
+			Service.Approve(id);
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Edit(int id) {
 			TestimonialViewModel vm = ToVewModel(Service.GetById(id));
 			return View("Edit", vm);
@@ -57,11 +58,12 @@ namespace LawFirm.Presenter.Controllers {
 
 		}
 
+		[Authorize(Roles = "Admin")]
 		public void Delete(int id) {
-			Service.PartialDelete(id);
+			Service.Delete(id);
 		}
-		
-		// GET: Testimonial
+
+
 		public ActionResult CreateTestimonial(TestimonialFormViewModel model) {
 			if (!ModelState.IsValid) {
 				return PartialView("_TestimonialForm", model);

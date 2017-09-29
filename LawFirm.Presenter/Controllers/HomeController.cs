@@ -105,8 +105,8 @@ namespace LawFirm.Presenter.Controllers {
 			return articles;
 		}
 
-		private ConsultationPreviewViewModel getRequestaConsultationPreview() {
-			return new ConsultationPreviewViewModel {
+		private ConsultationPreviewModel getRequestaConsultationPreview() {
+			return new ConsultationPreviewModel {
 				Practices = getPractices().Select(ToSelectListItem)
 			};
 		}

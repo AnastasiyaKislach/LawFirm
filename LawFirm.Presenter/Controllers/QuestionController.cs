@@ -22,14 +22,11 @@ namespace LawFirm.Presenter.Controllers {
 
 		public ActionResult Details(int id) {
 			Question question = Service.GetById(id);
-			QuestionViewModel vm = new QuestionViewModel {
-				Id = question.Id,
-				QuestionText = question.QuestionText,
-				Answer = question.Answer
-			};
+			QuestionViewModel vm = ToVewModel(question);
 			return View(vm);
 		}
 
+		[Authorize(Roles = "Admin")]
 		public ActionResult Modify() {
 			List<QuestionViewModel> vm = Service.GetAll().Select(ToVewModel).ToList();
 
@@ -37,11 +34,13 @@ namespace LawFirm.Presenter.Controllers {
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Create() {
 			return View("Create");
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Create(QuestionViewModel viewModel) {
 			if (!ModelState.IsValid) {
 				return View("Create", viewModel);
@@ -55,6 +54,7 @@ namespace LawFirm.Presenter.Controllers {
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Edit(int id) {
 			QuestionViewModel vm = ToVewModel(Service.GetById(id));
 			return View("Edit", vm);
@@ -68,17 +68,17 @@ namespace LawFirm.Presenter.Controllers {
 			}
 
 			Question question = ToModel(viewModel);
-			Service.Update(question);
+			Service.Edit(question);
 
 			List<QuestionViewModel> vm = Service.GetAll().Select(ToVewModel).ToList();
 
 			return View("Questions", vm);
 
 		}
-		
-		[Authorize]
+
+		[Authorize(Roles = "Admin")]
 		public void Delete(int id) {
-			Service.PartialDelete(id);
+			Service.Delete(id);
 		}
 
 		protected QuestionViewModel ToVewModel(Question model) {

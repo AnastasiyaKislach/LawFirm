@@ -1,5 +1,5 @@
 ﻿@using LawFirm.Presenter.Models
-@model LawFirm.Presenter.Models.ConsultationPreviewViewModel
+@model LawFirm.Presenter.Models.ConsultationPreviewModel
 
 <div id="consultation-request-section" class="form">
     @using (Ajax.BeginForm("ConsultationRequest", "Consultation", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "consultation-request-section", OnSuccess = "alert('Привеи');", }, new { @class = "", @id = "forma", role = "form" })) {
@@ -14,24 +14,24 @@
         <div class="col-md-offset-1 col-md-4">
             <div class="form-group text-center">
                 <label class="sr-only">ФИО</label>
-                @Html.TextBoxFor(m => m.RequestViewModel.Name, new { @class = "form-control", @id = "inputName", @placeholder = "ФИО" })
+                @Html.TextBoxFor(m => m.ConsultationViewModel.Name, new { @class = "form-control", @id = "inputName", @placeholder = "ФИО" })
             </div>
             <div class="form-group">
                 <label class="sr-only">Электронная почта</label>
-                @Html.TextBoxFor(m => m.RequestViewModel.Email, new { @class = "form-control", @id = "inputEmail", @placeholder = "Электронная почта" })
+                @Html.TextBoxFor(m => m.ConsultationViewModel.Email, new { @class = "form-control", @id = "inputEmail", @placeholder = "Электронная почта" })
             </div>
             <div class="form-group">
                 <label class="sr-only">Контактный телефон</label>
-                @Html.TextBoxFor(m => m.RequestViewModel.Phone, new { @class = "form-control", @id = "inputPhone", @placeholder = "Контактный телефон" })
+                @Html.TextBoxFor(m => m.ConsultationViewModel.Phone, new { @class = "form-control", @id = "inputPhone", @placeholder = "Контактный телефон" })
             </div>
             <div class="form-group">
-                @Html.DropDownListFor(m => m.RequestViewModel.PracticeId, Model.Practices, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.ConsultationViewModel.PracticeId, Model.Practices, new { @class = "form-control" })
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label class="sr-only">Описание проблемы</label>
-                @Html.TextAreaFor(m => m.RequestViewModel.MessageText, new { @class = "form-control", @id = "inputDescription", @placeholder = "Описание проблемы\n Укажите также, пожалуйста, желаемое время и день консультации."})
+                @Html.TextAreaFor(m => m.ConsultationViewModel.MessageText, new { @class = "form-control", @id = "inputDescription", @placeholder = "Описание проблемы\n Укажите также, пожалуйста, желаемое время и день консультации." })
             </div>
         </div>
         <div class="col-md-offset-5 col-md-7 form-group button">

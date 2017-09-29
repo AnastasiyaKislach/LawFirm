@@ -10,6 +10,6 @@ namespace LawFirm.Presenter.Models {
 		public PracticeView PracticePreview { get; set; }
 		public TestimonialView  TestimonialsPreview { get; set; }
 		public IQueryable<ArticlePreviewModel> ArticlesPreview { get; set; }
-		public ConsultationPreviewViewModel RequestaConsultationForm { get; set; }
+		public ConsultationPreviewModel RequestaConsultationForm { get; set; }
 	}
 }

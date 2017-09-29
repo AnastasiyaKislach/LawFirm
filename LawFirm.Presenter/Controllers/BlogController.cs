@@ -97,6 +97,7 @@ namespace LawFirm.Presenter.Controllers {
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Create() {
 			ArticleEditableViewModel vm = new ArticleEditableViewModel {
 				Categories = CategoryService.GetAll().Select(ToSelectListItem)
@@ -105,7 +106,14 @@ namespace LawFirm.Presenter.Controllers {
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Create(ArticleEditableViewModel viewModel, HttpPostedFileBase upload) {
+
+			if (upload == null) {
+				ModelState.AddModelError("Url", "Требуется поле Изображение");
+				return View(viewModel);
+			}
+
 			if (!ModelState.IsValid) {
 				return View("Create", viewModel);
 			}
@@ -117,13 +125,9 @@ namespace LawFirm.Presenter.Controllers {
 				CreationTime = DateTime.Now
 			};
 
-			if (upload != null) {
-				// получаем имя файла
-				string fileName = System.IO.Path.GetFileName(upload.FileName);
-				// сохраняем файл в папку Files в проекте
-				upload.SaveAs(Server.MapPath("/" + AppConfig.BlogImagesPath + fileName));
-				article.ImagePath = upload.FileName;
-			}
+			string fileName = System.IO.Path.GetFileName(upload.FileName);
+			upload.SaveAs(Server.MapPath("/" + AppConfig.BlogImagesPath + fileName));
+			article.ImagePath = upload.FileName;
 
 			Article newArticle = ArticleService.Add(article);
 
@@ -131,6 +135,7 @@ namespace LawFirm.Presenter.Controllers {
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Edit(int id) {
 			ArticleEditableViewModel vm = new ArticleEditableViewModel {
 				RequestViewModel = ToViewModel(ArticleService.GetArticleDetail(id)),
@@ -140,6 +145,7 @@ namespace LawFirm.Presenter.Controllers {
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Edit(ArticleEditableViewModel viewModel, HttpPostedFileBase upload) {
 			if (!ModelState.IsValid) {
 				return View("Edit", viewModel);
@@ -161,11 +167,13 @@ namespace LawFirm.Presenter.Controllers {
 				upload.SaveAs(Server.MapPath("/" + AppConfig.BlogImagesPath + fileName));
 				article.ImagePath = upload.FileName;
 			}
+
 			Article udatedArticle = ArticleService.Edit(article);
 
 			return RedirectToAction("Details", new { id = udatedArticle.Id });
 		}
 
+		[Authorize(Roles = "Admin")]
 		public ActionResult Modify() {
 			List<ArticlePreviewModel> vm = new List<ArticlePreviewModel>();
 
@@ -183,11 +191,11 @@ namespace LawFirm.Presenter.Controllers {
 			return View("Articles", vm);
 		}
 
-		public void Delete(int id)
-		{
-			ArticleService.PartialDelete(id);
+		[Authorize(Roles = "Admin")]
+		public void Delete(int id) {
+			ArticleService.Delete(id);
 		}
-	
+
 		protected ArticleInfo ToViewModel(ArticleInfo model) {
 
 			model.ImagePath = AppConfig.BlogImagesPath + model.ImagePath;

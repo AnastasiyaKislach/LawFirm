@@ -25,21 +25,18 @@ namespace LawFirm.Presenter.Controllers {
 
 		public ActionResult Details(int id) {
 			Practice practice = Service.GetById(id);
-			PracticeViewModel vm = new PracticeViewModel {
-				Id = practice.Id,
-				Title = practice.Title,
-				Text = practice.Text,
-				ImagePath = AppConfig.PracticeImagesPath + practice.ImagePath
-			};
+			PracticeViewModel vm = ToVewModel(practice);
 			return View(vm);
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Create() {
 			return View("Create");
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Create(PracticeViewModel viewModel, HttpPostedFileBase upload) {
 
 			if (upload == null) {
@@ -67,6 +64,7 @@ namespace LawFirm.Presenter.Controllers {
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Edit(int id) {
 			PracticeViewModel vm = ToVewModel(Service.GetById(id));
 			return View("Edit", vm);
@@ -88,7 +86,7 @@ namespace LawFirm.Presenter.Controllers {
 				practice.ImagePath = upload.FileName;
 			}
 
-			Service.Update(practice);
+			Service.Edit(practice);
 
 			PracticeViewModel vm = ToVewModel(Service.GetById(practice.Id));
 
@@ -96,8 +94,9 @@ namespace LawFirm.Presenter.Controllers {
 
 		}
 
+		[Authorize(Roles = "Admin")]
 		public void Delete(int id) {
-			Practice practice = Service.PartialDelete(id);
+			Service.Delete(id);
 		}
 
 		protected PracticeViewModel ToVewModel(Practice model) {

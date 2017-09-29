@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace LawFirm.Presenter.Models {
-	public class ConsultationPreviewViewModel {
+	public class ConsultationPreviewModel {
 		public IEnumerable<SelectListItem> Practices { get; set; }
-		public ConsultationViewModel RequestViewModel { get; set; }
+		public ConsultationViewModel ConsultationViewModel { get; set; }
 	}
 }

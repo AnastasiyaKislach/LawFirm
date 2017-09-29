@@ -14,17 +14,12 @@ namespace LawFirm.Presenter.Controllers {
 			SettingsService = new SettingsService(AppConfig.ConnectionString);
 		}
 
-
 		[HttpGet]
 		[Authorize(Roles = "Admin")]
 		public ActionResult AboutEdit() {
 			AppSettings appSettings = SettingsService.GetSettings();
 			ContactsViewModel viewModel = ToViewModel(appSettings);
 			return View("../Home/ContactsEdit", viewModel);
-		}
-
-		private ContactsViewModel ToViewModel(AppSettings appSettings) {
-			throw new NotImplementedException();
 		}
 
 		[HttpPost]
@@ -38,6 +33,10 @@ namespace LawFirm.Presenter.Controllers {
 			SettingsService.SetSetting(settings);
 
 			return RedirectToAction("Contacts", "Home");
+		}
+
+		private ContactsViewModel ToViewModel(AppSettings appSettings) {
+			throw new NotImplementedException();
 		}
 
 		private AppSettings ToModel(ContactsViewModel viewModel) {

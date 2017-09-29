@@ -1,0 +1,62 @@
+﻿@using LawFirm.Presenter.Models
+@model List<ConsultationViewModel>
+@{
+    ViewBag.Title = "Просмотр заявок";
+}
+
+<div class="title-page-wrap">
+    <div class="container">
+        <h2 class="page-title">@ViewBag.Title</h2>
+    </div>
+</div>
+<div class="container body-content">
+    <div class="customm-container">
+        <table class="table table-bordered table-hover table-condensed" show-filter="true">
+            <thead>
+                <colgroup>
+                    <col width="5%" />
+                    <col width="20%" />
+                    <col width="50%" />
+                    <col width="15%" />
+                    <col width="10%" />
+                </colgroup>
+                <tr>
+                    <th class="text-center">Номер</th>
+                    <th class="text-center">Контактные данные</th>
+                    <th class="text-center">Текст</th>
+                    <th class="text-center">Область практики</th>
+                    <th class="text-center">Редактирование</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var consultation in Model) {
+                    <tr id="question@(consultation.Id)">
+                        <td class="text-center">
+                            <span>@consultation.Id</span>
+                        </td>
+                        <td>
+                            <span>@consultation.Name</span>
+                            <span>@consultation.Email</span>
+                            <span>@consultation.Phone</span>
+                        </td>
+                        <td>
+                            <span>@consultation.MessageText</span>
+                        </td>
+                        <td>
+                            @Html.Hidden(consultation.PracticeId.ToString())
+                            <span>@consultation.PracticeTitle</span>
+                        </td>
+                        <td class="text-center">
+                            <a data-ajax="true" data-ajax-method="POST" data-ajax-update='' href="@Url.Action("Delete", "Consultation", new { id = consultation.Id})"
+                               data-ajax-success="lawfirm.pages.questions.removeQuestionRow(question@(consultation.Id))">
+                                <button class="btn btn-danger btn-sm" id="trash" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </a>
+                        </td>
+                    </tr>}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
