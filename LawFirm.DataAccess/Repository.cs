@@ -25,7 +25,7 @@ namespace LawFirm.DataAccess {
 			return entity;
 		}
 
-		public virtual TEntity Delete(TEntity entity) {
+		public virtual TEntity Remove(TEntity entity) {
 			Items.Remove(entity);
 			return entity;
 		}
