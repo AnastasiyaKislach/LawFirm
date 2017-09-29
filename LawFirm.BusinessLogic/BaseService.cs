@@ -28,9 +28,9 @@ namespace LawFirm.BusinessLogic {
 			return repository.Update(item);
 		}
 
-		public virtual T Delete(int id) {
+		public virtual T Remove(int id) {
 			T item = GetById(id);
-			return repository.Delete(item);
+			return repository.Remove(item);
 		}
 		
 		public void Save() {

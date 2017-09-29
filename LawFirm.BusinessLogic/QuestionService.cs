@@ -37,7 +37,7 @@ namespace LawFirm.BusinessLogic {
 
 		}
 
-		public Question PartialDelete(int id) {
+		public Question Delete(int id) {
 			Question question = GetById(id);
 
 			if (question != null) {

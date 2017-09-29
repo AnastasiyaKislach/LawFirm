@@ -28,7 +28,7 @@ namespace LawFirm.BusinessLogic {
 			return newConsultation;
 		}
 
-		public override Consultation Delete(int id) {
+		public Consultation Delete(int id) {
 			Consultation consultation = GetById(id);
 
 			if (consultation != null) {

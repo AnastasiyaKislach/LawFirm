@@ -37,8 +37,8 @@ namespace LawFirm.BusinessLogic {
 
 		}
 
-		public Practice PartialDelete(int id) {
-			Practice practice = DataContext.Practices.GetById(id);
+		public Practice Delete(int id) {
+			Practice practice = GetById(id);
 
 			if (practice != null) {
 				practice.IsDeleted = true;

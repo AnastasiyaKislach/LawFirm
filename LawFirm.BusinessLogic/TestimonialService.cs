@@ -41,13 +41,20 @@ namespace LawFirm.BusinessLogic {
 
 		}
 
-		public void PartialDelete(int id) {
+		public void Delete(int id) {
 			Testimonial testimonial = GetById(id);
 
 			if (testimonial != null) {
 				testimonial.IsDeleted = true;
 			}
 
+			Update(testimonial);
+			Save();
+		}
+
+		public void Approve(int id) {
+			Testimonial testimonial = GetById(id);
+			testimonial.IsApproved = !testimonial.IsApproved;
 			Update(testimonial);
 			Save();
 		}

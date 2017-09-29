@@ -25,7 +25,7 @@ namespace LawFirm.BusinessLogic {
 			Save();
 		}
 
-		public void PartialDelete(int id) {
+		public void Delete(int id) {
 			Slide slide = GetById(id);
 
 			if (slide != null) {

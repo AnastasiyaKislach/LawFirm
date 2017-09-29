@@ -42,7 +42,7 @@ namespace LawFirm.BusinessLogic {
 			return GetAll().Where(i => i.ParentCommentId == idComment).OrderByDescending(i => i.CreationTime).ToList();
 		}
 
-		public Comment PartialDelete(int id) {
+		public Comment Delete(int id) {
 			Comment comment = GetById(id);
 
 			if (comment != null) {

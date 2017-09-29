@@ -40,7 +40,7 @@ namespace LawFirm.BusinessLogic {
 			return updatedArticle;
 		}
 
-		public Article PartialDelete(int id) {
+		public Article Delete(int id) {
 			Article article = DataContext.Articles.GetById(id);
 
 			if (article != null) {

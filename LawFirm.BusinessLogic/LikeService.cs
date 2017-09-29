@@ -13,20 +13,20 @@ namespace LawFirm.BusinessLogic {
 			return base.GetAll().Where(i => !i.IsDeleted);
 		}
 
-		public Like PartialDelete(Like like) {
+		public Like Delete(Like like) {
 
 			if (like == null) {
 				throw new ArgumentNullException(nameof(like));
 			}
 
-			PartialDelete(like.Id);
+			Delete(like.Id);
 
 			return like;
 		}
 
-		public Like PartialDelete(int likeId) {
+		public Like Delete(int likeId) {
 
-			Like like = DataContext.Likes.GetById(likeId);
+			Like like = GetById(likeId);
 
 			if (like != null) {
 				like.IsDeleted = true;
@@ -69,18 +69,18 @@ namespace LawFirm.BusinessLogic {
 				throw new ArgumentNullException(nameof(like));
 			}
 
-			Delete(like.Id);
+			Remove(like.Id);
 			Save();
 
 			return like;
 		}
 
-		public Like Remove(int likeId) {
+		public override Like Remove(int likeId) {
 
 			Like like = GetById(likeId);
 
 			if (like != null) {
-				Remove(like);
+				base.Remove(like.Id);
 			}
 
 			return like;
